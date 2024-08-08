@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>General Question test</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body {
+				display: grid;
+				place-items: center;
+				gap: 1rem;
+				position: relative;
+			}
+			.container {
+				border: 1px solid black;
+				margin-top: 20px;
+				padding: 1rem;
+				border-radius: 5px;
+				.margi {
+					font-size: 16px;
+					font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+						Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+						sans-serif;
+				}
+				div {
+					display: grid;
+					grid-template-columns: 1fr 1fr;
+					grid-template-rows: 1fr 1fr;
+					row-gap: 0.2rem;
+					margin-block: 8px;
+					margin-left: 15px;
+
+					label {
+						font-size: 14px;
+						font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+						display: flex;
+						align-items: center;
+						gap: 8px;
+						width: 134px;
+						padding: 0.4rem;
+						border-radius: 4px;
+						text-transform: capitalize;
+						span {
+							font-size: 16px;
+							color: black;
+						}
+					}
+				}
+			}
+			button {
+				min-width: 36%;
+				padding-block: 0.5rem;
+				font-size: 18px;
+				background-color: blue;
+				border: none;
+				border-radius: 5px;
+				font-weight: 800;
+				color: white;
+
+				&:hover {
+					background-color: rgb(45, 45, 252);
+				}
+				&:active {
+					background-color: rgb(10, 217, 21);
+				}
+			}
+			#markcontiner {
+				display: flex;
+				margin-block: 10px;
+				border: 1px solid black;
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+				align-items: center;
+				justify-content: center;
+				p:nth-child(1) {
+					transform: translateY(-20px);
+					font-size: 30px;
+				}
+				p:nth-child(2) {
+					/* transform: translateY(0px); */
+					font-size: 25px;
+				}
+				p:nth-child(3) {
+					transform: translateY(20px);
+					/* font-size: 24px; */
+				}
+			}
+			.active {
+				color: blue;
+				font-weight: 600;
+			}
+			.warning {
+				background-color: red;
+				font-size: 18px;
+				font-family: sans-serif;
+				width: 442px;
+				text-align: center;
+				padding: 0.4rem;
+				color: white;
+				letter-spacing: 0.5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container" id="container">
+			<p class="margi">Q1) In what galaxy is our solar system located?</p>
+			<div id="Q1">
+				<label for="A1" Value="0"><span>A)</span> The Milky Way</label>
+				<label for="B1" Value="0"><span>B)</span> Andromeda</label>
+				<label for="C1" Value="0"><span>C)</span> Antennae</label>
+				<label for="D1" Value="0"><span>D)</span> Black Eye</label>
+			</div>
+			<p class="margi">Q2) What type of gas is absorbed by plants?</p>
+
+			<div id="Q2">
+				<label for="A2" value="0"> <span>A)</span> Oxygen</label>
+				<label for="B2" value="0"> <span>B)</span> Nitrogen</label>
+				<label for="C2" value="0"> <span>C)</span> CarbondiOxide</label>
+				<label for="D2" value="0"> <span>D)</span> Water</label>
+			</div>
+			<p class="margi">Q3) Which planet is known as the "Red Planet"?</p>
+
+			<div id="Q3">
+				<label for="A3" value="0"> <span>A)</span> Jupiter</label>
+				<label for="B3" value="0"> <span>B)</span> mars</label>
+				<label for="C3" value="0"> <span>C)</span> moon</label>
+				<label for="D3" value="0"> <span>D)</span> satern</label>
+			</div>
+			<p class="margi">Q4) What is the shortest month of the year?</p>
+
+			<div id="Q4">
+				<label for="A4" value="0"> <span>A)</span> may</label>
+				<label for="B4" value="0"> <span>B)</span> fabruary</label>
+				<label for="C4" value="0"> <span>C)</span> january</label>
+				<label for="D4" value="0"> <span>D)</span> july</label>
+			</div>
+			<p class="margi">Q5) What language contains the most words?</p>
+
+			<div id="Q5">
+				<label for="A5" value="0"> <span>A)</span> amharic</label>
+				<label for="B5" value="0"> <span>B)</span> mandarin</label>
+				<label for="C5" value="0"> <span>C)</span> british</label>
+				<label for="D5" value="0"> <span>D)</span> english</label>
+			</div>
+			<p class="margi">
+				Q6) What is the chemical symbol for the element mercury?
+			</p>
+
+			<div id="Q6">
+				<label for="A6" value="0"> <span>A)</span> W</label>
+				<label for="B6" value="0"> <span>B)</span> Mc</label>
+				<label for="C6" value="0"> <span>C)</span> Hg</label>
+				<label for="D6" value="0"> <span>D)</span> Mt</label>
+			</div>
+			<p class="margi">Q7) How long is the small intestine?</p>
+
+			<div id="Q7">
+				<label for="A7"> <span>A)</span> 7m</label>
+				<label for="B7"> <span>B)</span> 10m</label>
+				<label for="C7"> <span>C)</span> 5m</label>
+				<label for="D7"> <span>D)</span> 9m</label>
+			</div>
+			<p class="margi">Q8) How many chambers does the human heart have?</p>
+
+			<div id="Q8">
+				<label for="A8"> <span>A)</span> 4</label>
+				<label for="B8"> <span>B)</span> 2</label>
+				<label for="C8"> <span>C)</span> 6</label>
+				<label for="D8"> <span>D)</span> 1</label>
+			</div>
+			<p class="margi">
+				Q9) Name the country known as the Land of the Rising Sun.
+			</p>
+
+			<div id="Q9">
+				<label for="A9"> <span>A)</span> russia</label>
+				<label for="B9"> <span>B)</span> india</label>
+				<label for="C9"> <span>C)</span> china</label>
+				<label for="D9"> <span>D)</span> japan</label>
+			</div>
+			<p class="margi">Q10) Which bird lays the largest eggs?</p>
+			<div id="Q10">
+				<label for="A10"> <span>A)</span> giraffe</label>
+				<label for="B10"> <span>B)</span> chicken</label>
+				<label for="C10"> <span>C)</span> ostrich</label>
+				<label for="D10"> <span>D)</span> hawk</label>
+			</div>
+		</div>
+		<button onclick="Submit()" id="button">Submit</button>
+		<p id="warning"></p>
+		<div id="markcontiner">
+			<p id="mark">?</p>
+			<p>/</p>
+			<p>10</p>
+		</div>
+
+		<script>
+			const mark = document.getElementById("mark");
+			const Answerssheet = document.querySelectorAll("label");
+			const array = Array.from(Answerssheet);
+			const perChunk = 4;
+			// code from Stackoverflow dividing array
+			const answergrup = array.reduce((resultArray, item, index) => {
+				const chunkIndex = Math.floor(index / perChunk);
+
+				if (!resultArray[chunkIndex]) {
+					resultArray[chunkIndex] = [];
+				}
+
+				resultArray[chunkIndex].push(item);
+
+				return resultArray;
+			}, []);
+			// code from ChatGPT removing and adding style
+			answergrup.forEach((element) => {
+				element.forEach((label) => {
+					label.onclick = function () {
+						element.forEach((btn) => {
+							btn.style.fontWeight = "normal";
+							btn.style.backgroundColor = "white";
+							btn.style.color = "black";
+						});
+						this.style.fontWeight = "600";
+						this.style.backgroundColor = "blue";
+						this.style.color = "white";
+					};
+				});
+			});
+
+			function Submit() {
+				let checkedarray = [];
+				const warning = document.getElementById("warning");
+
+				array.forEach((element) => {
+					if (element.style.fontWeight == "600") {
+						checkedarray.push(element);
+					}
+				});
+
+				if (checkedarray.length < 10) {
+					warning.classList.add("warning");
+					warning.textContent =
+						"please check your answers that All question have chosen answer";
+				} else {
+					warning.textContent = "";
+					resultchecker(checkedarray);
+				}
+			}
+			function resultchecker(answers) {
+				let answercontainer = {
+					Q1: "A1",
+					Q2: "C2",
+					Q3: "B3",
+					Q4: "B4",
+					Q5: "D5",
+					Q6: "C6",
+					Q7: "A7",
+					Q8: "A8",
+					Q9: "D9",
+					Q10: "C10",
+				};
+				let result = 0;
+				if (answers[0].attributes.for.textContent == answercontainer.Q1) {
+					result++;
+					answers[0].style.backgroundColor = "rgb(9, 255, 10)";
+				}
+				else{
+					answers[0].style.backgroundColor = "red";
+				}
+				if (answers[1].attributes.for.textContent == answercontainer.Q2) {
+					result++;
+					answers[1].style.backgroundColor = "rgb(9, 255, 10)";
+				}
+				else{
+					answers[1].style.backgroundColor = "red";
+				}
+				if (answers[2].attributes.for.textContent == answercontainer.Q3) {
+					result++;
+					answers[2].style.backgroundColor = "rgb(9, 255, 10)";
+				}
+				else{
+					answers[2].style.backgroundColor = "red";
+				}
+				if (answers[3].attributes.for.textContent == answercontainer.Q4) {
+					result++;
+					answers[3].style.backgroundColor = "rgb(9, 255, 10)";
+				}
+				else{
+					answers[3].style.backgroundColor = "red";
+				}
+				if (answers[4].attributes.for.textContent == answercontainer.Q5) {
+					result++;
+					answers[4].style.backgroundColor = "rgb(9, 255, 10)";
+				}
+				else{
+					answers[4].style.backgroundColor = "red";
+				}
+				if (answers[5].attributes.for.textContent == answercontainer.Q6) {
+					result++;
+					answers[5].style.backgroundColor = "rgb(9, 255, 10)";
+				}
+				else{
+					answers[5].style.backgroundColor = "red";
+				}
+				if (answers[6].attributes.for.textContent == answercontainer.Q7) {
+					result++;
+					answers[6].style.backgroundColor = "rgb(9, 255, 10)";
+				}
+				else{
+					answers[6].style.backgroundColor = "red";
+				}
+				if (answers[7].attributes.for.textContent == answercontainer.Q8) {
+					result++;
+					answers[7].style.backgroundColor = "rgb(9, 255, 10)";
+				}
+				else{
+					answers[7].style.backgroundColor = "red";
+				}
+				if (answers[8].attributes.for.textContent == answercontainer.Q9) {
+					result++;
+					answers[8].style.backgroundColor = "rgb(9, 255, 10)";
+				}
+				else{
+					answers[8].style.backgroundColor = "red";
+				}
+				if (answers[9].attributes.for.textContent == answercontainer.Q10) {
+					result++;
+					answers[9].style.backgroundColor = "rgb(9, 255, 10)";
+				}
+				else{
+					answers[9].style.backgroundColor = "red";
+				}
+				mark.textContent = result;
+
+				const res10 = document.getElementById("r10");
+				const res98 = document.getElementById("r9-8");
+				const res76 = document.getElementById("r7-6");
+
+			}
+		</script>
+	</body>
+</html>

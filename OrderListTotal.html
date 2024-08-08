@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>OrderListTotal</title>
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				transition: 0.3s;
+			}
+			body {
+				height: 100dvh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-image: url("img/scatterblobeeffect.svg");
+				background-size: cover;
+				backdrop-filter: blur(60px);
+			}
+			.container {
+				width: 70%;
+				height: 80%;
+				border: 1px solid rgba(255, 255, 255, 0.375);
+				display: flex;
+				border-radius: 10px;
+				background-color: rgba(255, 255, 255, 0.165);
+
+				.left {
+					width: 44%;
+					display: flex;
+					flex-direction: column;
+					flex-wrap: wrap;
+					align-items: center;
+					justify-content: space-between;
+					padding: clamp(0.6rem, 2%, 1.5rem);
+					border-right: 1px solid rgba(255, 255, 255, 0.375);
+
+					button {
+						background-color: rgba(255, 255, 255, 0.15);
+						border: none;
+						padding: 0.5rem;
+						font-size: clamp(16px, 5vw, 20px);
+						color: white;
+						border-radius: 5px;
+						font-family: poppins;
+						font-weight: lighter;
+						text-transform: capitalize;
+						cursor: pointer;
+						width: 100%;
+					}
+					button:hover {
+						background-color: rgba(255, 255, 255, 0.3);
+						transform: scale(1.03, 1);
+					}
+					button:active {
+						background-color: rgba(255, 255, 255, 0.633);
+					}
+				}
+
+				.right {
+					display: flex;
+					flex-direction: column;
+					width: 56%;
+					height: 100%;
+
+					.counter {
+						height: 88%;
+						display: flex;
+						flex-direction: column;
+						color: white;
+						gap: 0.5rem;
+						padding: clamp(0.5rem, 2vw, 1rem);
+						overflow-y: scroll;
+
+						div {
+							display: flex;
+							justify-content: space-between;
+							flex-wrap: wrap;
+							padding: 0.5rem;
+							border: 1px solid rgba(255, 255, 255, 0.746);
+							z-index: 100;
+							p {
+								font-size: clamp(15px, 2vw, 20px);
+								font-family: poppins;
+								text-transform: capitalize;
+								z-index: -1;
+
+								span {
+									font-size: clamp(6px, 2vw, 12px);
+									z-index: -1;
+								}
+								.fonts {
+									font-size: clamp(10px, 2vw, 16px);
+									z-index: -1;
+								}
+							}
+							button {
+								padding: 0.1rem;
+								padding-inline: 0.3rem;
+								border-radius: 5px;
+								border: none;
+								color: black;
+								font-family: poppins;
+								font-size: clamp(10px, 2vw, 16px);
+							}
+						}
+					}
+					.total {
+						background-color: rgba(170, 161, 150, 0.201);
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						padding: clamp(0.5rem, 2vw, 1rem);
+						box-sizing: border-box;
+						flex-wrap: wrap;
+						color: white;
+						p {
+							font-size: clamp(18px, 3vw, 21px);
+							font-family: poppins;
+							font-weight: 400;
+
+							span {
+								font-size: clamp(8px, 2vw, 14px);
+							}
+						}
+						#title {
+							font-size: clamp(16px, 3vw, 18px);
+						}
+					}
+				}
+			}
+			.edit {
+				width: 100%;
+				height: 20%;
+				background-color: sienna;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="left">
+				<button value="500">cake</button>
+				<button value="200">cokis</button>
+				<button value="20">biskit</button>
+				<button value="5">5 birr bread</button>
+				<button value="10">10 birr bread</button>
+				<button value="25">Donaut</button>
+				<button value="30">slise Bread</button>
+			</div>
+			<div class="right">
+				<div class="counter" id="counting"></div>
+				<div class="total">
+					<p id="title">Total:</p>
+					<p id="ress">0 <span>Birr</span></p>
+				</div>
+			</div>
+		</div>
+		<script>
+			const oreders = document.querySelectorAll("button");
+			const result = document.getElementById("ress");
+			const counting = document.getElementById("counting");
+			let sum = 0;
+
+			oreders.forEach((order) => {
+				order.addEventListener("click", (event) => {
+					sum += Number(event.target.value);
+					result.innerHTML = `${sum} <span>Birr</span> `;
+				});
+				order.addEventListener("click", AddToCart);
+			});
+
+			function AddToCart(event) {
+				var orderlist = event.target;
+				var Name = orderlist.textContent;
+				var Price = orderlist.value;
+				additemtoCart(Name, Price);
+			}
+
+			function additemtoCart(Name,Price) {
+				var wanted = document.createElement("div");
+				wanted.innerHTML = `<p><span class='fonts'>${Name}</span></p><p>+${Price}<span>Birr</span></p>`;
+				wanted.lastElementChild.value = Price;
+				var Remover = document.createElement('button')
+				Remover.innerHTML = `Remove`
+				Remover.classList.add('Remover')				
+				wanted.append(Remover);
+				counting.append(wanted);
+				Remover.addEventListener('click', RemoveCartitem)
+			}
+
+			function RemoveCartitem(event){
+				event.target.parentElement.remove();
+				const privsibvalue = event.target.previousElementSibling.value;
+				sum -= Number(privsibvalue);
+				result.innerHTML = `${sum} <span>Birr</span> `;
+			}
+		</script>
+	</body>
+</html>
