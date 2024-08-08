@@ -9,29 +9,48 @@
 				position: relative;
 				background-color: #fff;
 			}
+			.wraper{
+				border: 3px solid black;
+				width: fit-content;
+				margin-inline: auto;
+				padding: .6rem;
+			}
+			.content{
+				display: flex;
+				justify-content: space-between;
+				font-size: 26px;
+			}
 			.gamecontainer{
-				background: linear-gradient(rgba(144, 238, 144, 0.744) 50%,rgba(4, 177, 4, 0.582) 50%),linear-gradient(90deg,rgba(85, 255, 85, 0.432) 50%,rgba(4, 177, 4, 0.42) 50%);
-				background-size: 20px 20px;
+				background: linear-gradient(90deg,rgba(0, 128, 0, 0.563) 50%,rgba(144, 238, 144, 0.515) 50%),linear-gradient(rgba(0, 128, 0, 0.869) 50%,lightgreen 50%);
+				background-size: 40px 40px;
 				width: 400px;
 				height: 400px;
 				position: relative;
 				overflow: hidden;
-				#shankehade{
+				#shankehade,#Shankfood{
 					background-color: rgb(255, 0, 0);
-					width: 10px;
-					height: 10px;
+					width: 20px;
+					height: 20px;
 					position: absolute;
-					transition: .05s;
+				}
+				#Shankfood{
+					background-color: rgb(238, 255, 52);
 				}
 			}
 		
 		</style>
 	</head>
 	<body>
-		<!-- Under development -->
+		<div class="wraper">
 		<div class="gamecontainer">
 			<div id="shankehade"></div>
+			<div id="Shankfood"></div>
+		</div>	
+		<div class="content"><p id="score">score: 0</p>
+		<p>level: hard</p></div>
+		
 		</div>
+		
 		<script src="Snakegame-function.js"></script>
 	</body>
 </html>
