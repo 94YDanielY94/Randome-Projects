@@ -4,36 +4,76 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 		<style>	
 		body {
 				position: relative;
-				background-color: #fff;
+				background-color: #ffffff;
+			}
+			.stater{
+				width: 400px;
+				height: 450px;
+				border: 2px solid rgb(6, 255, 14);
+				margin-inline: auto;
+				.top{
+					margin-top: 18%;
+					text-align: center;
+					p{
+						font-size: 60px;
+						color: rgb(1, 215, 1);
+						font-family: "Josefin Sans", sans-serif;
+					}
+					button{
+						font-size: 25px;
+						padding: .2rem 1.2rem;
+						font-family: "Josefin Sans", sans-serif;
+					}
+				}
+				#settingopen{
+					margin-top: 47%;
+					border: none;
+					background-color: transparent;
+				}
+				.settingcontainer{
+					display: none;
+				}
 			}
 			.wraper{
 				border: 3px solid black;
 				width: fit-content;
 				margin-inline: auto;
-				padding: .6rem;
+				/* padding: .6rem; */
 			}
 			.content{
 				display: flex;
 				justify-content: space-between;
 				font-size: 26px;
+				padding-inline: 1rem;
 			}
 			.gamecontainer{
-				background: linear-gradient(90deg,rgba(0, 128, 0, 0.563) 50%,rgba(144, 238, 144, 0.515) 50%),linear-gradient(rgba(0, 128, 0, 0.869) 50%,lightgreen 50%);
+				/* background: linear-gradient(90deg,rgba(0, 128, 0, 0.563) 50%,rgba(144, 238, 144, 0.515) 50%),linear-gradient(rgba(0, 128, 0, 0.869) 50%,lightgreen 50%); */
+				background-color: green;
 				background-size: 40px 40px;
 				width: 400px;
 				height: 400px;
 				position: relative;
 				overflow: hidden;
-				#shankehade,#Shankfood{
+				--snakesize : 10px;
+				#snakehade,#Snakfood{
 					background-color: rgb(255, 0, 0);
-					width: 20px;
-					height: 20px;
+					width: var(--snakesize);
+					height: var(--snakesize);
 					position: absolute;
 				}
-				#Shankfood{
+				.newtile,#snaketile1{
+					background-color: rgb(0, 73, 175);
+					width: var(--snakesize);
+					height: var(--snakesize);
+					position: absolute;
+				}
+				#Snakfood{
 					background-color: rgb(238, 255, 52);
 				}
 			}
@@ -41,10 +81,24 @@
 		</style>
 	</head>
 	<body>
-		<div class="wraper">
-		<div class="gamecontainer">
-			<div id="shankehade"></div>
-			<div id="Shankfood"></div>
+		<div class="stater">
+			<div class="top"><p>Snake Game</p>
+			<button>Play</button></div>
+			<button id="settingopen"><svg fill="#000000" width="40px" height="40px" viewBox="0 0 1.2 1.2" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="M0.995 0.633a0.05 0.05 0 0 1 0 -0.066l0.064 -0.072a0.05 0.05 0 0 0 0.006 -0.058l-0.1 -0.173a0.05 0.05 0 0 0 -0.054 -0.024l-0.094 0.019a0.05 0.05 0 0 1 -0.057 -0.033l-0.03 -0.092a0.05 0.05 0 0 0 -0.048 -0.034h-0.2a0.05 0.05 0 0 0 -0.05 0.034l-0.028 0.092a0.05 0.05 0 0 1 -0.057 0.033L0.25 0.24a0.05 0.05 0 0 0 -0.05 0.024L0.1 0.437a0.05 0.05 0 0 0 0.005 0.058l0.064 0.072a0.05 0.05 0 0 1 0 0.066L0.105 0.705a0.05 0.05 0 0 0 -0.005 0.058l0.1 0.173a0.05 0.05 0 0 0 0.054 0.024l0.094 -0.019a0.05 0.05 0 0 1 0.057 0.033l0.03 0.092a0.05 0.05 0 0 0 0.05 0.034h0.2a0.05 0.05 0 0 0 0.048 -0.034l0.03 -0.092a0.05 0.05 0 0 1 0.057 -0.033l0.094 0.019a0.05 0.05 0 0 0 0.054 -0.024l0.1 -0.173a0.05 0.05 0 0 0 -0.006 -0.058ZM0.921 0.7l0.04 0.045 -0.064 0.111 -0.059 -0.012a0.15 0.15 0 0 0 -0.173 0.1L0.646 1h-0.128L0.5 0.943a0.15 0.15 0 0 0 -0.173 -0.1l-0.059 0.012 -0.065 -0.111 0.04 -0.045a0.15 0.15 0 0 0 0 -0.2l-0.04 -0.045 0.064 -0.11 0.059 0.012a0.15 0.15 0 0 0 0.173 -0.1L0.518 0.2h0.128l0.019 0.057a0.15 0.15 0 0 0 0.173 0.1l0.059 -0.012 0.064 0.111 -0.04 0.045a0.15 0.15 0 0 0 0 0.199m-0.339 -0.3a0.2 0.2 0 1 0 0.2 0.2 0.2 0.2 0 0 0 -0.2 -0.2m0 0.3a0.1 0.1 0 1 1 0.1 -0.1 0.1 0.1 0 0 1 -0.1 0.1"/></svg></button>
+			<div class="settingcontainer">
+				<select name="Gamelevel" id="gamelevel">
+					<option value="Easy">Easy</option>
+					<option value="Midume">Midume</option>
+					<option value="Hard">Hard</option>
+				</select>
+				<p id="highscore">0</p>
+			</div>
+		</div>
+		<div class="wraper" style="display: none;">
+		<div class="gamecontainer" id="container">
+			<div id='snaketile1'></div>
+			<div id="snakehade"></div>
+			<div id="Snakfood"></div>
 		</div>	
 		<div class="content"><p id="score">score: 0</p>
 		<p>level: hard</p></div>
