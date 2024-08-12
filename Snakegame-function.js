@@ -1,21 +1,10 @@
 // ------Under development--------
-function sattings() {
-	const settingopen = document.getElementById("settingopen");
-	const settingcont = document.getElementById("settingcontainer");
-	if (settingcont.style.display == "none") {
-		settingcont.style.display = "inline";
-		settingopen.style.rotate = "-20deg";
-	} else {
-		settingcont.style.display = "none";
-		settingopen.style.rotate = "0deg";
-	}
-}
-
+let run = true;
 function play() {
 	document.getElementById("starter").style.display = "none";
-	document.getElementById("Gameend").style.display = "none";
 	document.getElementById("Gamewarper").style.display = "block";
 	const gamelevel = document.getElementById("gamelevel");
+	const playlevel = document.getElementById("playlevel");
 	const gamecontainer = document.getElementById("container");
 	const snakehade = document.getElementById("snakehade");
 	const Snakefood = document.getElementById("Snakfood");
@@ -39,17 +28,19 @@ function play() {
 	let privkey;
 	let newkey;
 	let score = 0;
+
 	switch (gamelevel.value) {
 		case "Easy":
-			speed = 300;
+			speed = 200;
 			break;
 		case "Mid":
-			speed = 180;
+			speed = 140;
 			break;
 		case "Hard":
-			speed = 90;
+			speed = 70;
 			break;
 	}
+	playlevel.textContent = `Game level: ${gamelevel.value}`;
 	snakehade.style.top = `${y}px`;
 	snakehade.style.left = `${x}px`;
 
@@ -78,13 +69,13 @@ function play() {
 		return randompos;
 	}
 	let starterid = setInterval(() => {
-		x += moveamount;
 		xpositionarray.push(x);
+		x += moveamount;
 		ypositionarray.push(y);
 		assign();
 		Colusion();
 	}, speed);
-	
+
 	document.addEventListener("keydown", (event) => {
 		if (event.key.startsWith("Arrow")) {
 			event.preventDefault();
@@ -93,7 +84,7 @@ function play() {
 			switch (event.key) {
 				case "ArrowUp":
 					newkey = event.key;
-					if (privkey == newkey || privkey == "ArrowDown") {
+					if (privkey == newkey || privkey == "ArrowDown" || !run) {
 					} else {
 						moveupid = setInterval(() => {
 							y -= moveamount;
@@ -111,21 +102,24 @@ function play() {
 					newkey = event.key;
 					if (privkey == newkey || privkey == "ArrowUp") {
 					} else {
-						movedownid = setInterval(() => {
-							y += moveamount;
-							Colusion();
-							assign();
-							xpositionarray.push(x);
-							ypositionarray.push(y);
-						}, speed);
-						clearInterval(moveupid);
-						clearInterval(moveleftid);
-						clearInterval(moverightid);
+						if (run === true) {
+							movedownid = setInterval(() => {
+								y += moveamount;
+								Colusion();
+								assign();
+								xpositionarray.push(x);
+								ypositionarray.push(y);
+							}, speed);
+							clearInterval(moveupid);
+							clearInterval(moveleftid);
+							clearInterval(moverightid);
+						
+						}
 					}
 					break;
 				case "ArrowRight":
 					newkey = event.key;
-					if (privkey == newkey || privkey == "ArrowLeft") {
+					if (privkey == newkey || privkey == "ArrowLeft" || !run) {
 					} else {
 						moveleftid = setInterval(() => {
 							x += moveamount;
@@ -183,28 +177,33 @@ function play() {
 
 	function Colusion() {
 		if (x >= 400 || x < 0 || y >= 400 || y < 0) {
+			console.log(run);
 			x = 10;
 			y = 0;
-			privkey = null;
-			newkey = null;
 			xpositionarray = [];
 			ypositionarray = [];
 			tilearray = [];
-			poschackearray = [];
+			Snakefoodx = undefined;
+			Snakefoody = undefined;
+			moveupid = null;
+			movedownid = null;
+			moveleftid = null;
+			moverightid = null;
+			speed = undefined;
+			tilecounter = 1;
+			privkey = undefined;
+			newkey = undefined;
+			score = 0;
+			snaketile1.style.top = 0;
+			snaketile1.style.left = 0;
+
 			clearInterval(moveleftid);
 			clearInterval(moveupid);
 			clearInterval(movedownid);
 			clearInterval(moverightid);
-			Snakefood.style.top = `${Randomreturn()}px`;
-			Snakefood.style.left = `${Randomreturn()}px`;
-			snaketile1.style.top = 0;
-			snaketile1.style.left = 0;
-			numb = Snakefood.style.left.match(/\d/g);
-			Snakefoodx = numb.join("");
-			numb = Snakefood.style.top.match(/\d/g);
-			Snakefoody = numb.join("");
-			tilecounter = 1;
+			clearInterval(starterid);
 
+			run = false;
 			if (document.querySelectorAll(".newtile").length >= 1) {
 				let removetile = document.querySelectorAll(".newtile");
 				removetile.forEach((element) => {
@@ -213,8 +212,8 @@ function play() {
 			}
 			Gameend(score, gamelevel);
 			score = 0;
+			scorediplay.textContent = `score: ${score}`;
 		}
-
 		if (x == Snakefoodx && y == Snakefoody) {
 			addandassigntile();
 			score++;
@@ -236,17 +235,8 @@ function play() {
 		Snakefoody = numb.join("");
 	}
 }
-function Gameend(score, gamelevel) {
-	document.getElementById("starter").style.display = "none";
-	document.getElementById("Gameend").style.display = "block";
+function Gameend(score) {
+	document.getElementById("starter").style.display = "block";
 	document.getElementById("Gamewarper").style.display = "none";
 	document.getElementById("Bhighscore").textContent = `High Score: ${score}`;
-	document.getElementById("highscore").textContent = `High Score: ${score}`;
-	document.getElementById("currentlevel").textContent = `Game level: ${gamelevel.value}`;
-
-}
-function Back() {
-	document.getElementById("starter").style.display = "block";
-	document.getElementById("Gameend").style.display = "none";
-	document.getElementById("Gamewarper").style.display = "none";
 }

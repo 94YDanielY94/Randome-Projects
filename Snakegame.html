@@ -30,6 +30,9 @@
 						font-weight: 700;
 						font-family: "Josefin Sans", sans-serif;
 					}
+					h1{
+						color: #fff;
+					}
 					button {
 						font-family: monospace;
 						font-size: 1.5rem;
@@ -49,20 +52,13 @@
 						transform: translate(-1px, 3px);
 					}
 				}
-				#settingopen {
-					margin-top: 37%;
-					border: none;
-					background-color: transparent;
-				}
 				#settingcontainer {
-					display: none;
-					position: absolute;
 					border: 2px solid white;
 					border-radius: 5px;
 					padding: 0.5rem;
 					color: white;
-					bottom: 50px;
-					left: 90px;
+					width: 30%;
+					margin-inline: auto;
 					select {
 						width: 100%;
 						padding: 0.2rem;
@@ -88,29 +84,36 @@
 			}
 			.gamecontainer {
 				/* background: linear-gradient(90deg,rgba(0, 128, 0, 0.563) 50%,rgba(144, 238, 144, 0.515) 50%),linear-gradient(rgba(0, 128, 0, 0.869) 50%,lightgreen 50%); */
-				background-color: green;
+				background-color: rgb(11, 11, 11);
 				background-size: 40px 40px;
 				width: 400px;
 				height: 400px;
 				position: relative;
 				overflow: hidden;
 				--snakesize: 10px;
-				#snakehade,
+				#snakehade
+				 {
+					background-color: rgb(255, 255, 255);
+					width: var(--snakesize);
+					height: var(--snakesize);
+					position: absolute;
+					border-radius: 3px;
+				}
+				.newtile,
+				#snaketile1 {
+					background-color: rgb(255, 255, 255);
+					width: var(--snakesize);
+					height: var(--snakesize);
+					position: absolute;
+					border-radius: 3px;
+					clip-path: polygon(0 25%, 25% 24%, 25% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 99%, 25% 75%, 0 75%);
+				}
 				#Snakfood {
 					background-color: rgb(255, 0, 0);
 					width: var(--snakesize);
 					height: var(--snakesize);
 					position: absolute;
-				}
-				.newtile,
-				#snaketile1 {
-					background-color: rgb(0, 73, 175);
-					width: var(--snakesize);
-					height: var(--snakesize);
-					position: absolute;
-				}
-				#Snakfood {
-					background-color: rgb(238, 255, 52);
+					border-radius: 50%;
 				}
 			}
 			#Gameend{
@@ -148,28 +151,15 @@
 			<div class="top">
 				<p>Snake Game</p>
 				<button onclick="play()">Play</button>
+				<h1 id='Bhighscore'>High Score : 0</h1>
+
 			</div>
-			<button id="settingopen" onclick="sattings()">
-				<svg
-					fill="#fff"
-					width="40px"
-					height="40px"
-					viewBox="0 0 1.2 1.2"
-					xmlns="http://www.w3.org/2000/svg"
-					data-name="Layer 1"
-				>
-					<path
-						d="M0.995 0.633a0.05 0.05 0 0 1 0 -0.066l0.064 -0.072a0.05 0.05 0 0 0 0.006 -0.058l-0.1 -0.173a0.05 0.05 0 0 0 -0.054 -0.024l-0.094 0.019a0.05 0.05 0 0 1 -0.057 -0.033l-0.03 -0.092a0.05 0.05 0 0 0 -0.048 -0.034h-0.2a0.05 0.05 0 0 0 -0.05 0.034l-0.028 0.092a0.05 0.05 0 0 1 -0.057 0.033L0.25 0.24a0.05 0.05 0 0 0 -0.05 0.024L0.1 0.437a0.05 0.05 0 0 0 0.005 0.058l0.064 0.072a0.05 0.05 0 0 1 0 0.066L0.105 0.705a0.05 0.05 0 0 0 -0.005 0.058l0.1 0.173a0.05 0.05 0 0 0 0.054 0.024l0.094 -0.019a0.05 0.05 0 0 1 0.057 0.033l0.03 0.092a0.05 0.05 0 0 0 0.05 0.034h0.2a0.05 0.05 0 0 0 0.048 -0.034l0.03 -0.092a0.05 0.05 0 0 1 0.057 -0.033l0.094 0.019a0.05 0.05 0 0 0 0.054 -0.024l0.1 -0.173a0.05 0.05 0 0 0 -0.006 -0.058ZM0.921 0.7l0.04 0.045 -0.064 0.111 -0.059 -0.012a0.15 0.15 0 0 0 -0.173 0.1L0.646 1h-0.128L0.5 0.943a0.15 0.15 0 0 0 -0.173 -0.1l-0.059 0.012 -0.065 -0.111 0.04 -0.045a0.15 0.15 0 0 0 0 -0.2l-0.04 -0.045 0.064 -0.11 0.059 0.012a0.15 0.15 0 0 0 0.173 -0.1L0.518 0.2h0.128l0.019 0.057a0.15 0.15 0 0 0 0.173 0.1l0.059 -0.012 0.064 0.111 -0.04 0.045a0.15 0.15 0 0 0 0 0.199m-0.339 -0.3a0.2 0.2 0 1 0 0.2 0.2 0.2 0.2 0 0 0 -0.2 -0.2m0 0.3a0.1 0.1 0 1 1 0.1 -0.1 0.1 0.1 0 0 1 -0.1 0.1"
-					/>
-				</svg>
-			</button>
 			<div id="settingcontainer">
 				<select name="Gamelevel" id="gamelevel">
 					<option value="Easy">Easy</option>
 					<option value="Mid">Mid</option>
 					<option value="Hard">Hard</option>
 				</select>
-				<p id="highscore">High Score: 0</p>
 			</div>
 		</div>
 		<div class="wraper" id="Gamewarper">
@@ -180,13 +170,8 @@
 			</div>
 			<div class="content">
 				<p id="score">score: 0</p>
-				<p>level: hard</p>
+				<p id="playlevel">level: hard</p>
 			</div>
-		</div>
-		<div id="Gameend">
-			<p id='Bhighscore'>high Score : 0</p>
-			<p id="currentlevel">Gamelevel: easy</p>
-			<button onclick="Back()">Back</button>
 		</div>
 
 		<script src="Snakegame-function.js"></script>
