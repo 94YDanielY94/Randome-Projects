@@ -15,65 +15,12 @@
 				position: relative;
 				background-color: #222;
 			}
-			.stater {
-				width: 400px;
-				height: 450px;
-				border: 2px solid rgb(255, 255, 255);
-				margin-inline: auto;
-				display: block;
-				.top {
-					margin-top: 18%;
-					text-align: center;
-					p {
-						font-size: 60px;
-						color: rgb(111, 255, 9);
-						font-weight: 700;
-						font-family: "Josefin Sans", sans-serif;
-					}
-					h1{
-						color: #fff;
-					}
-					button {
-						font-family: monospace;
-						font-size: 1.5rem;
-						color: #fafafa;
-						text-transform: uppercase;
-						padding: 10px 20px;
-						border-radius: 10px;
-						border: 2px solid #fafafa;
-						background: #252525;
-						box-shadow: -1px 3px #fafafa;
-						cursor: pointer;
-						margin-top: 10px;
-					}
-
-					button:active {
-						box-shadow: none;
-						transform: translate(-1px, 3px);
-					}
-				}
-				#settingcontainer {
-					border: 2px solid white;
-					border-radius: 5px;
-					padding: 0.5rem;
-					color: white;
-					width: 30%;
-					margin-inline: auto;
-					select {
-						width: 100%;
-						padding: 0.2rem;
-					}
-					p {
-						font-size: 20px;
-					}
-				}
-			}
+			
 			.wraper {
 				border: 3px solid black;
 				width: fit-content;
 				margin-inline: auto;
 				/* padding: .6rem; */
-				display: none;
 				color: white;
 			}
 			.content {
@@ -147,6 +94,7 @@
 		</style>
 	</head>
 	<body>
+		
 		<div class="wraper" id="Gamewarper">
 			<div class="gamecontainer" id="container">
 				<div id="snaketile1"></div>
@@ -155,7 +103,7 @@
 			</div>
 			<div class="content">
 				<p id="score">score: 0</p>
-				<p id="playlevel">level:<select name="Gamelevel" id="gamelevel">
+				<p id="playlevel">Game level: <select name="Gamelevel" id="gamelevel">
 					<option value="Easy">Easy</option>
 					<option value="Mid">Mid</option>
 					<option value="Hard">Hard</option>

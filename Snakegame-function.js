@@ -1,5 +1,6 @@
 // ------Under development--------
 const gamelevel = document.getElementById("gamelevel");
+const playlevel = document.getElementById("playlevel");
 const gamecontainer = document.getElementById("container");
 const snakehade = document.getElementById("snakehade");
 const Snakefood = document.getElementById("Snakfood");
@@ -12,8 +13,12 @@ let y = 0;
 let xpositionarray = [];
 let ypositionarray = [];
 let tilearray = [];
+let tileXposarray = [];
+let tileYposarray = [];
 let Snakefoodx;
 let Snakefoody;
+let tileXpos;
+let tileYpos;
 let moveupid = null;
 let movedownid = null;
 let moveleftid = null;
@@ -24,18 +29,6 @@ let privkey;
 let newkey;
 let score = 0;
 
-switch (gamelevel.value) {
-	case "Easy":
-		speed = 200;
-		break;
-	case "Mid":
-		speed = 140;
-		break;
-	case "Hard":
-		speed = 70;
-		break;
-}
-playlevel.textContent = `Game level: ${gamelevel.value}`;
 snakehade.style.top = `${y}px`;
 snakehade.style.left = `${x}px`;
 
@@ -47,30 +40,50 @@ Snakefoodx = numb.join("");
 var numb = Snakefood.style.top.match(/\d/g);
 Snakefoody = numb.join("");
 
-function Randomreturn(tile) {
+function Randomreturn() {
 	let array = [];
 	for (let index = 1; index < 41; index++) {
 		let seq = 10 * (index - 1);
 		array.push(seq);
 	}
-	let randompos = array[Math.floor(Math.random() * 40)];
-	// if (document.querySelectorAll(".newtile").length >= 1) {
-	// 	poschackearray.push(tile);
-	// 	poschackearray.forEach((element) => {
-	// 		console.log(element.style.top);
-	// 	});
-	// }
-
-	return randompos;
+	tileXposarray.forEach((element) => {
+		element = Number(element);
+	});
+	tileYposarray.forEach((element) => {
+		element = Number(element);
+	});
+	let random = array[Math.floor(Math.random() * 40)];
+	for (let index = 0; index < tilecounter; index++) {
+		if (
+		random == tileYposarray[tileYposarray.length - index] &&
+		random == tileXposarray[tileXposarray.length - index]
+	) {
+		console.log(random);
+	}
+	}
+	
+	return random;
 }
+
 document.addEventListener("keydown", (event) => {
 	if (event.key.startsWith("Arrow")) {
+		switch (gamelevel.value) {
+			case "Easy":
+				speed = 160;
+				break;
+			case "Mid":
+				speed = 115;
+				break;
+			case "Hard":
+				speed = 60;
+				break;
+		}
 		event.preventDefault();
 		Colusion();
 		switch (event.key) {
 			case "ArrowUp":
 				newkey = event.key;
-				if (privkey == newkey || privkey == "ArrowDown" || !run) {
+				if (privkey == newkey || privkey == "ArrowDown") {
 				} else {
 					moveupid = setInterval(() => {
 						y -= moveamount;
@@ -88,23 +101,21 @@ document.addEventListener("keydown", (event) => {
 				newkey = event.key;
 				if (privkey == newkey || privkey == "ArrowUp") {
 				} else {
-					if (run === true) {
-						movedownid = setInterval(() => {
-							y += moveamount;
-							Colusion();
-							assign();
-							xpositionarray.push(x);
-							ypositionarray.push(y);
-						}, speed);
-						clearInterval(moveupid);
-						clearInterval(moveleftid);
-						clearInterval(moverightid);
-					}
+					movedownid = setInterval(() => {
+						y += moveamount;
+						Colusion();
+						assign();
+						xpositionarray.push(x);
+						ypositionarray.push(y);
+					}, speed);
+					clearInterval(moveupid);
+					clearInterval(moveleftid);
+					clearInterval(moverightid);
 				}
 				break;
 			case "ArrowRight":
 				newkey = event.key;
-				if (privkey == newkey || privkey == "ArrowLeft" || !run) {
+				if (privkey == newkey || privkey == "ArrowLeft") {
 				} else {
 					moveleftid = setInterval(() => {
 						x += moveamount;
@@ -156,32 +167,37 @@ function assign(tile) {
 					ypositionarray.length - element.attributes.value.textContent
 				]
 			}px`;
+			var numb = element.style.left.match(/\d/g);
+			tileXpos = numb.join("");
+			var numb = element.style.top.match(/\d/g);
+			tileYpos = numb.join("");
+			tileXposarray.push(tileXpos);
+			tileYposarray.push(tileYpos);
 		}
 	});
 }
 
 function Colusion() {
 	if (x >= 400 || x < 0 || y >= 400 || y < 0) {
-		console.log(run);
 		x = 10;
 		y = 0;
 		xpositionarray = [];
 		ypositionarray = [];
 		tilearray = [];
-		Snakefoodx = undefined;
-		Snakefoody = undefined;
-		moveupid = null;
-		movedownid = null;
-		moveleftid = null;
-		moverightid = null;
 		speed = undefined;
 		tilecounter = 1;
 		privkey = undefined;
 		newkey = undefined;
-		score = 0;
 		snaketile1.style.top = 0;
 		snaketile1.style.left = 0;
-
+		score = 0;
+		scorediplay.textContent = `score: ${score}`;
+		Snakefood.style.top = `${Randomreturn()}px`;
+		Snakefood.style.left = `${Randomreturn()}px`;
+		numb = Snakefood.style.left.match(/\d/g);
+		Snakefoodx = numb.join("");
+		numb = Snakefood.style.top.match(/\d/g);
+		Snakefoody = numb.join("");
 		clearInterval(moveleftid);
 		clearInterval(moveupid);
 		clearInterval(movedownid);
@@ -193,9 +209,6 @@ function Colusion() {
 				element.remove();
 			});
 		}
-		Gameend(score, gamelevel);
-		score = 0;
-		scorediplay.textContent = `score: ${score}`;
 	}
 	if (x == Snakefoodx && y == Snakefoody) {
 		addandassigntile();
@@ -210,8 +223,8 @@ function addandassigntile() {
 	tilecounter++;
 	tile.setAttribute("value", tilecounter);
 	assign(tile);
-	Snakefood.style.top = `${Randomreturn(tile)}px`;
-	Snakefood.style.left = `${Randomreturn(tile)}px`;
+	Snakefood.style.top = `${Randomreturn()}px`;
+	Snakefood.style.left = `${Randomreturn()}px`;
 	numb = Snakefood.style.left.match(/\d/g);
 	Snakefoodx = numb.join("");
 	numb = Snakefood.style.top.match(/\d/g);
