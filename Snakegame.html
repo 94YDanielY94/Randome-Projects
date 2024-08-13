@@ -147,21 +147,6 @@
 		</style>
 	</head>
 	<body>
-		<div class="stater" id="starter">
-			<div class="top">
-				<p>Snake Game</p>
-				<button onclick="play()">Play</button>
-				<h1 id='Bhighscore'>High Score : 0</h1>
-
-			</div>
-			<div id="settingcontainer">
-				<select name="Gamelevel" id="gamelevel">
-					<option value="Easy">Easy</option>
-					<option value="Mid">Mid</option>
-					<option value="Hard">Hard</option>
-				</select>
-			</div>
-		</div>
 		<div class="wraper" id="Gamewarper">
 			<div class="gamecontainer" id="container">
 				<div id="snaketile1"></div>
@@ -170,7 +155,11 @@
 			</div>
 			<div class="content">
 				<p id="score">score: 0</p>
-				<p id="playlevel">level: hard</p>
+				<p id="playlevel">level:<select name="Gamelevel" id="gamelevel">
+					<option value="Easy">Easy</option>
+					<option value="Mid">Mid</option>
+					<option value="Hard">Hard</option>
+				</select></p>
 			</div>
 		</div>
 
