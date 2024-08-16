@@ -183,11 +183,18 @@
 				let sever = starterchoose();
 				boxs.forEach((element) => {
 					element.onclick = function () {
-						if (document.body.style.backgroundColor == "rgb(255, 141, 141)") {
-							document.body.style.backgroundColor = "rgb(141, 164, 255)";
+						backgroundchange();
+
+						if (counter == starter.X.length) {
+							restart();
 						} else {
-							document.body.style.backgroundColor = "rgb(255, 141, 141)";
+							if (element.textContent == '') {
+								setTimeout(() => {
+									counter++;
+								}, 10);								
+							}
 						}
+
 						if (boxarray[element.attributes.value.textContent] == "") {
 							if (sever == 1) {
 								element.textContent = starter.X[counter];
@@ -195,13 +202,10 @@
 								element.textContent = starter.O[counter];
 							}
 							boxarray[element.attributes.value.textContent] =
-								element.textContent;
+								element.textContent;	
 						}
-						if (counter == starter.X.length) {
-							restart();
-						} else {
-							counter++;
-						}
+
+						
 						if (
 							(boxarray[0] == "X" &&
 								boxarray[1] == "X" &&
@@ -318,7 +322,7 @@
 							setTimeout(() => {
 								scorecounter(boxarray[0]);
 								restart();
-							}, 2000);
+							}, 1000);
 						} else if (
 							(boxarray[2] == "X" &&
 								boxarray[4] == "X" &&
@@ -334,7 +338,7 @@
 							setTimeout(() => {
 								scorecounter(boxarray[2]);
 								restart();
-							}, 2000);
+							}, 1000);
 						}
 					};
 				});
@@ -367,6 +371,13 @@
 				} else if (sever == "O") {
 					scoreO++;
 					score.textContent = `${scoreX}:${scoreO}`;
+				}
+			}
+			function backgroundchange() {
+				if (document.body.style.backgroundColor == "rgb(255, 141, 141)") {
+					document.body.style.backgroundColor = "rgb(141, 164, 255)";
+				} else {
+					document.body.style.backgroundColor = "rgb(255, 141, 141)";
 				}
 			}
 		</script>
