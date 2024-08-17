@@ -15,7 +15,28 @@
 				position: relative;
 				background-color: #444;
 			}
-
+			#info {
+				position: absolute;
+				background-color: #eeeeee22;
+				backdrop-filter: blur(20px);
+				z-index: 100;
+				height: 500px;
+				text-align: center;
+				width: 100%;
+				* {
+					color: white;
+				}
+				button {
+					padding: 1rem 2rem;
+					font-size: 30px;
+					background-color: black;
+					border: none;
+					border-radius: 8px;
+					&:active {
+						background-color: #444;
+					}
+				}
+			}
 			.wraper {
 				border: 3px solid black;
 				width: fit-content;
@@ -28,9 +49,9 @@
 				justify-content: space-between;
 				font-size: 26px;
 				padding-inline: 1rem;
-				#playlevel{
-					select{
-						padding: .3rem .7rem;
+				#playlevel {
+					select {
+						padding: 0.3rem 0.7rem;
 						background-color: #eee;
 						font-weight: 700;
 					}
@@ -82,11 +103,21 @@
 					border-radius: 50%;
 				}
 			}
-			
-			
 		</style>
 	</head>
 	<body>
+		<div  id="info">
+			<h1>--------------- Wellcome to Snake Game ---------------</h1>
+			<p>
+				Sanke game made by Daniel Yohannes is made for entertainment and to testing ability of my programming skills
+			</p>
+			<h3>To play</h3>
+			<p>do not Click 'W,A,S,D' keys</p>
+			<p>Click the Arrow keys on the keborde</p>
+			<h2>Dont click any arrow before clicking play button</h2>
+			<button onclick="infooff()">Play</button>
+			<h1 style="color: red;"> if noting is working refesh the page</h1>
+		</div>
 		<div class="wraper" id="Gamewarper">
 			<div class="gamecontainer" id="container">
 				<div id="snaketile1"></div>
@@ -107,6 +138,9 @@
 		</div>
 
 		<script>
+			function infooff() {
+				document.getElementById("info").style.display = "none";
+			}
 			const gamelevel = document.getElementById("gamelevel");
 			const playlevel = document.getElementById("playlevel");
 			const gamecontainer = document.getElementById("container");
@@ -164,7 +198,9 @@
 				return random;
 			}
 
-			document.addEventListener("keydown", (event) => {
+			document.addEventListener("keydown", movment);
+
+			function movment(event) {
 				if (event.key.startsWith("Arrow")) {
 					switch (gamelevel.value) {
 						case "Easy":
@@ -206,6 +242,7 @@
 									assign();
 									xpositionarray.push(x);
 									ypositionarray.push(y);
+									console.log("a");
 								}, speed);
 								clearInterval(moveupid);
 								clearInterval(moveleftid);
@@ -247,7 +284,7 @@
 					}
 					privkey = event.key;
 				}
-			});
+			}
 			function assign(tile) {
 				snakehade.style.top = `${y}px`;
 				snakehade.style.left = `${x}px`;
@@ -303,7 +340,7 @@
 					clearInterval(moveupid);
 					clearInterval(movedownid);
 					clearInterval(moverightid);
-
+					document.removeEventListener("keydown", movment);
 					if (document.querySelectorAll(".newtile").length >= 1) {
 						let removetile = document.querySelectorAll(".newtile");
 						removetile.forEach((element) => {

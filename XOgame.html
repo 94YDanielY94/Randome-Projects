@@ -11,6 +11,28 @@
 			body {
 				background-color: rgb(141, 164, 255);
 			}
+			#info {
+				position: absolute;
+				background-color: #eeeeee22;
+				backdrop-filter: blur(20px);
+				z-index: 1000;
+				height: 500px;
+				text-align: center;
+				width: 100%;
+				* {
+					color: black;
+				}
+				button {
+					padding: 1rem 2rem;
+					font-size: 30px;
+					background-color: black;
+					border: none;
+					border-radius: 8px;
+					&:active {
+						background-color: #444;
+					}
+				}
+			}
 			.gamecontainer {
 				margin-inline: auto;
 				width: 300px;
@@ -67,13 +89,14 @@
 					position: absolute;
 					width: 100%;
 					height: 100%;
-					z-index: 1000;
+					z-index: 100;
 					background-color: rgba(0, 0, 0, 0.202);
 					backdrop-filter: blur(5px);
 					border-radius: 10px;
 					display: grid;
 					place-items: center;
 					button {
+						color: white;
 						padding: 0.3rem 1rem;
 						font-size: 30px;
 						border: none;
@@ -81,7 +104,7 @@
 						font-family: poppins;
 						text-transform: capitalize;
 						&:active {
-							background-color: #333;
+							background-color: #5f5f5f;
 						}
 					}
 				}
@@ -124,6 +147,18 @@
 		</style>
 	</head>
 	<body>
+		<div  id="info">
+			<h1>--------------- Wellcome to XO game ---------------</h1>
+			<p>
+				XO game made by Daniel Yohannes is made for entertainment and to testing ability of my programming skills
+			</p>
+			<h3>To play</h3>
+			<p>first you need to choose who is going to start form X or O  at the top</p>
+			<p>secode click play and click on the Hashes to play</p>
+			<h2>if you are a tie or no ONE won just click on one of the Hashes and it will restart</h2>
+			<button onclick="infooff()" style="color: wheat;">Play</button>
+			<h1 style="color: red;"> if noting is working refesh the page</h1>
+		</div>
 		<div class="content">
 			<div>
 				<label for="XOstart" id="XOstarter"
@@ -149,6 +184,9 @@
 			<div id="line"></div>
 		</div>
 		<script>
+			function infooff() {
+				document.getElementById("info").style.display = "none";
+			}
 			const boxs = document.querySelectorAll("#box");
 			const XOstarter = document.querySelectorAll("#XOstarter");
 			const line = document.getElementById("line");
