@@ -159,10 +159,11 @@
 			};
 
 			let starterchoosen = 0;
-			let counter = 0;
+			let counter = -1;
 			let scoreX = 0;
 			let scoreO = 0;
 			let boxarray = ["", "", "", "", "", "", "", "", ""];
+			let beat = new Audio('swish-paper-jam-fx-1-00-01.mp3');
 
 			XOstarter.forEach((input) => {
 				input.addEventListener("click", () => {
@@ -185,26 +186,23 @@
 					element.onclick = function () {
 						backgroundchange();
 
-						if (counter == starter.X.length) {
+						if (counter == starter.X.length -1) {
 							restart();
 						} else {
 							if (element.textContent == '') {
-								setTimeout(() => {
 									counter++;
-								}, 10);								
 							}
 						}
 
-						if (boxarray[element.attributes.value.textContent] == "") {
-							if (sever == 1) {
-								element.textContent = starter.X[counter];
-							} else if (sever == 2) {
-								element.textContent = starter.O[counter];
-							}
-							boxarray[element.attributes.value.textContent] =
-								element.textContent;	
-						}
-
+if (boxarray[element.attributes.value.textContent] == "") {
+	if (sever == 1) {
+		element.textContent = starter.X[counter];
+	} else if (sever == 2) {
+		element.textContent = starter.O[counter];
+	}
+	boxarray[element.attributes.value.textContent] =
+	element.textContent;	
+}
 						
 						if (
 							(boxarray[0] == "X" &&
@@ -213,6 +211,7 @@
 							(boxarray[0] == "O" && boxarray[1] == "O" && boxarray[2] == "O")
 						) {
 							line.style.display = "inline";
+							beat.play()
 							line.style.top = "14%";
 							line.style.left = "5.5%";
 							line.style.rotate = "0deg";
@@ -230,6 +229,7 @@
 							(boxarray[3] == "O" && boxarray[4] == "O" && boxarray[5] == "O")
 						) {
 							line.style.display = "inline";
+							beat.play()
 							line.style.top = "48%";
 							line.style.left = "5.5%";
 							line.style.rotate = "0deg";
@@ -247,11 +247,13 @@
 							(boxarray[6] == "O" && boxarray[7] == "O" && boxarray[8] == "O")
 						) {
 							line.style.display = "inline";
+							beat.play()
 							line.style.top = "82%";
 							line.style.left = "5.5%";
 							line.style.rotate = "0deg";
 							line.style.transformOrigin = "center";
 							line.style.width = "100%";
+
 							setTimeout(() => {
 								scorecounter(boxarray[6]);
 								restart();
@@ -263,6 +265,7 @@
 							(boxarray[0] == "O" && boxarray[3] == "O" && boxarray[6] == "O")
 						) {
 							line.style.display = "inline";
+							beat.play()
 							line.style.rotate = "90deg";
 							line.style.transformOrigin = "left";
 							line.style.top = "5.5%";
@@ -280,6 +283,7 @@
 							(boxarray[1] == "O" && boxarray[4] == "O" && boxarray[7] == "O")
 						) {
 							line.style.display = "inline";
+							beat.play()
 							line.style.rotate = "90deg";
 							line.style.transformOrigin = "left";
 							line.style.top = "5.5%";
@@ -297,6 +301,7 @@
 							(boxarray[2] == "O" && boxarray[5] == "O" && boxarray[8] == "O")
 						) {
 							line.style.display = "inline";
+							beat.play()
 							line.style.rotate = "90deg";
 							line.style.transformOrigin = "left";
 							line.style.top = "5.5%";
@@ -314,11 +319,13 @@
 							(boxarray[0] == "O" && boxarray[4] == "O" && boxarray[8] == "O")
 						) {
 							line.style.display = "inline";
+							beat.play()
 							line.style.rotate = "45deg";
 							line.style.top = "48%";
 							line.style.left = "-5%";
 							line.style.transformOrigin = "center";
 							line.style.width = "110%";
+
 							setTimeout(() => {
 								scorecounter(boxarray[0]);
 								restart();
@@ -330,11 +337,13 @@
 							(boxarray[2] == "O" && boxarray[4] == "O" && boxarray[6] == "O")
 						) {
 							line.style.display = "inline";
+							beat.play()
 							line.style.rotate = "-45deg";
 							line.style.top = "48%";
 							line.style.right = "-5%";
 							line.style.transformOrigin = "center";
 							line.style.width = "110%";
+
 							setTimeout(() => {
 								scorecounter(boxarray[2]);
 								restart();
@@ -357,7 +366,7 @@
 				boxs.forEach((element) => {
 					element.textContent = "";
 				});
-				counter = 0;
+				counter = -1;
 				starterchoosen = 0;
 				sever = 0;
 				boxarray = ["", "", "", "", "", "", "", "", ""];
