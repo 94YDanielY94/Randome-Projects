@@ -16,9 +16,9 @@
 				display: grid;
 				grid-template-columns: repeat(5, 1fr);
 				#box {
-                    clip-path: polygon(10% 10%, 90% 10%, 90% 90%, 10% 90%);
-                    width: calc(300px / 5);
-                    height: calc(300px / 5);
+					clip-path: polygon(10% 10%, 90% 10%, 90% 90%, 10% 90%);
+					width: calc(300px / 5);
+					height: calc(300px / 5);
 					background-color: transparent;
 					display: grid;
 					place-items: center;
@@ -26,6 +26,14 @@
 					font-family: poppins;
 					font-weight: 600;
 					color: #222;
+				}
+			}
+			.align {
+				display: flex;
+				gap: 2rem;
+				font-size: 30px;
+				p {
+					padding: 0.5rem;
 				}
 			}
 		</style>
@@ -59,6 +67,39 @@
 			<div id="box" value="23"></div>
 			<div id="box" value="24"></div>
 		</div>
-		<script src="BIngog.js"></script>
+		<div class="align">
+			<p id="bingo">B</p>
+			<p id="bingo">I</p>
+			<p id="bingo">N</p>
+			<p id="bingo">G</p>
+			<p id="bingo">O</p>
+		</div>
+		<script>
+			const boxs = document.querySelectorAll("#box");
+			let array = [];
+			for (let index = 1; index <= 25; index++) {
+				array.push(index);
+			}
+			function shuffle(array) {
+				for (let i = array.length - 1; i > 0; i--) {
+					const randome = Math.floor(Math.random() * (i + 1));
+
+					[array[i], array[randome]] = [array[randome], array[i]];
+				}
+			}
+			shuffle(array);
+			boxs.forEach((box) => {
+				box.textContent = array[box.attributes.value.textContent];
+				box.onclick = function () {
+					box.style.backgroundColor = "rgba(20,200,20,.3)";
+					box.style.color = "white";
+				};
+			});
+			document.querySelectorAll("#bingo").forEach((element) => {
+				element.onclick = function () {
+					element.style.backgroundColor = "peru";
+				};
+			});
+		</script>
 	</body>
 </html>
