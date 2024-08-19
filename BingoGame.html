@@ -91,8 +91,9 @@
 			boxs.forEach((box) => {
 				box.textContent = array[box.attributes.value.textContent];
 				box.onclick = function () {
-					box.style.backgroundColor = "rgba(20,200,20,.3)";
-					box.style.color = "white";
+						box.style.backgroundColor = "rgba(20,200,20,.3)";
+						box.style.color = "white";
+					
 				};
 			});
 			document.querySelectorAll("#bingo").forEach((element) => {
