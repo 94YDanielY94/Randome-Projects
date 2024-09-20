@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            transition: .2s;
+            margin: 0;
+        }
+        body{
+            background-color:chocolate;
+            display: grid;
+            place-items: center;
+            height: 100vh;
+        }
+        #gamecontainer{
+            min-height: 526px;
+            width: 541px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            #container-container{
+                background-color: #1c1c1c; 
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                z-index: -1;
+                display: flex;
+                border-radius: 20px;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                gap: 1rem;
+                width: calc(56.8px * 7  + 7rem );
+                padding: 1rem;
+                flex-wrap: wrap;
+                .container{
+                    width: 59px;
+                    height: 59px;
+                    border-radius: 50%;
+                    background-color: #d2691e;
+                }    
+            }
+        }
+        #objectmove{
+            border: 4.3px solid black;
+            width: 52px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            margin-left: 1rem;
+        }
+        #a1,#a2,#a3,#a4,#a5,#a6,#a7,#a8,#a9,#a10,#a11,#a12,#a13,#a14,#a15,#a16,#a17,#a18,#a19,#a20,#a21,#a22,#a23,#a24,#a25,#a26,#a27,#a28,#a29,#a30,#a31,#a32,#a33,#a34,#a35,#a36,#a37,#a38,#a39,#a40,#a41,#a42{
+            border: 4.3px solid black;
+            width: 52px;
+            aspect-ratio: 1;
+            background-color: tomato;
+            border-radius: 50%;
+        }
+        @keyframes step1 {
+            form{
+                translate: 0 0;
+            }
+            to{
+                translate: 0 75px;
+            }
+        }
+        @keyframes step2 {
+            form{
+                translate: 0 0;
+            }
+            to{
+                translate: 0 150px;
+            }
+        }
+        @keyframes step3 {
+            form{
+                translate: 0 0;
+            }
+            to{
+                translate: 0 225px;
+            }
+        }
+        @keyframes step4 {
+            form{
+                translate: 0 0;
+            }
+            to{
+                translate: 0 300px;
+            }
+        }
+        @keyframes step5 {
+            form{
+                translate: 0 0;
+            }
+            to{
+                translate: 0 375px;
+            }
+        }
+        @keyframes step6 {
+            form{
+                translate: 0 0;
+            }
+            to{
+                translate: 0 450px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="gamecontainer">
+        <div id="objectmove"  style="background-color: tomato;"></div>
+        <div id="container-container">
+
+        </div>
+    </div>
+    <script src="4inarow.js"></script>
+</body>
+</html>
