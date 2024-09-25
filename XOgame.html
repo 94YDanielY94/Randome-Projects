@@ -1,433 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>XOgame</title>
-		<style>
-			* {
-				transition: 0.1s;
-			}
-			body {
-				background-color: rgb(141, 164, 255);
-			}
-			#info {
-				position: absolute;
-				background-color: #eeeeee22;
-				backdrop-filter: blur(20px);
-				z-index: 1000;
-				height: 500px;
-				text-align: center;
-				width: 100%;
-				* {
-					color: black;
-				}
-				button {
-					padding: 1rem 2rem;
-					font-size: 30px;
-					background-color: black;
-					border: none;
-					border-radius: 8px;
-					
-					&:active {
-						background-color: #444;
-					}
-				}
-			}
-			.gamecontainer {
-				margin-inline: auto;
-				width: 300px;
-				height: 300px;
-				background-color: transparent;
-				display: grid;
-				grid-template-columns: 1fr 1fr 1fr;
-				grid-template-rows: 1fr 1fr 1fr;
-				overflow: hidden;
-				position: relative;
-				#box {
-					background-color: transparent;
-					border: 0.25rem solid #333;
-					display: grid;
-					place-items: center;
-					font-size: 60px;
-					font-family: poppins;
-					font-weight: 600;
-					color: #222;
-				}
-				#box:nth-child(1) {
-					border-top: 0;
-					border-left: 0;
-				}
-				#box:nth-child(2) {
-					border-top: 0;
-				}
-				#box:nth-child(3) {
-					border-top: 0;
-					border-right: 0;
-				}
-				#box:nth-child(4) {
-					border-left: 0;
-				}
-				#box:nth-child(6) {
-					border-right: 0;
-				}
-				#box:nth-child(1) {
-					border-top: 0;
-					border-left: 0;
-				}
-				#box:nth-child(7) {
-					border-bottom: 0;
-					border-left: 0;
-				}
-				#box:nth-child(8) {
-					border-bottom: 0;
-				}
-				#box:nth-child(9) {
-					border-bottom: 0;
-					border-right: 0;
-				}
-				#play {
-					position: absolute;
-					width: 100%;
-					height: 100%;
-					z-index: 100;
-					background-color: rgba(0, 0, 0, 0.202);
-					backdrop-filter: blur(5px);
-					border-radius: 10px;
-					display: grid;
-					place-items: center;
-					button {
-						color: black;
-						padding: 0.3rem 1rem;
-						font-size: 30px;
-						border: none;
-						border-radius: 5px;
-						font-family: poppins;
-						text-transform: capitalize;
-						&:active {
-							background-color: #5f5f5f;
-						}
-					}
-				}
-				#line {
-					position: absolute;
-					background-color: white;
-					width: 88%;
-					height: 10px;
-					display: none;
-				}
-			}
-			.content {
-				font-size: 30px;
-				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-				font-weight: 600;
-				display: grid;
-				place-items: center;
-				p {
-					margin: 0;
-					font-size: 50px;
-				}
-				label {
-					padding: 0rem 2rem;
-					background-color: white;
-					border-radius: 50px;
-					input {
-						display: none;
-					}
-				}
-				label:nth-child(1) {
-					border-top-right-radius: 0;
-					border-bottom-right-radius: 0;
-				}
-			}
-			label:nth-child(2) {
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
-				border-left: 1px solid #222;
-			}
-		</style>
-	</head>
-	<body>
-		<div  id="info">
-			<h1>--------------- Wellcome to XO game ---------------</h1>
-			<p>
-				XO game made by Daniel Yohannes is made for entertainment and to testing ability of my programming skills
-			</p>
-			<h3>To play</h3>
-			<p>first you need to choose who is going to start form X or O  at the top</p>
-			<p>secode click play and click on the Hashes to play</p>
-			<h2>if you are a tie or no ONE won just click on one of the Hashes and it will restart</h2>
-			<button onclick="infooff()" style="color: wheat;">Play</button>
-			<h1 style="color: red;"> if noting is working refesh the page</h1>
-		</div>
-		<div class="content">
-			<div>
-				<label for="XOstart" id="XOstarter"
-					><input type="radio" name="XOstart" />X
-				</label>
-				<label for="XOstart" id="XOstarter"
-					><input type="radio" name="XOstart" />O</label
-				>
-			</div>
-			<p id="win-lose">0:0</p>
-		</div>
-		<div class="gamecontainer">
-			<div id="box" value="0"></div>
-			<div id="box" value="1"></div>
-			<div id="box" value="2"></div>
-			<div id="box" value="3"></div>
-			<div id="box" value="4"></div>
-			<div id="box" value="5"></div>
-			<div id="box" value="6"></div>
-			<div id="box" value="7"></div>
-			<div id="box" value="8"></div>
-			<div id="play"><button onclick="start()">play</button></div>
-			<div id="line"></div>
-		</div>
-		<script>
-			function infooff() {
-				document.getElementById("info").style.display = "none";
-			}
-			const boxs = document.querySelectorAll("#box");
-			const XOstarter = document.querySelectorAll("#XOstarter");
-			const line = document.getElementById("line");
-			const score = document.getElementById("win-lose");
-			const starter = {
-				X: ["X", "O", "X", "O", "X", "O", "X", "O", "X"],
-				O: ["O", "X", "O", "X", "O", "X", "O", "X", "O"],
-			};
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XO Game</title>
+    <style>
+        * {
+            transition: 0.1s;
+        }
 
-			let starterchoosen = 0;
-			let counter = -1;
-			let scoreX = 0;
-			let scoreO = 0;
-			let boxarray = ["", "", "", "", "", "", "", "", ""];
-			let beat = new Audio('swish-paper-jam-fx-1-00-01.mp3');
+        body {
+            transition: background-color 0.3s ease;
+            background-color: #3498db;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-			XOstarter.forEach((input) => {
-				input.addEventListener("click", () => {
-					XOstarter.forEach((btn) => {
-						btn.style.backgroundColor = "white";
-					});
-					input.style.backgroundColor = "blue";
-				});
-			});
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(238, 238, 238, 0.133);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            height: 100vh;
+            text-align: center;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
 
-			function start() {
-				XOstarter.forEach((input) => {
-					if (input.style.backgroundColor === "blue") {
-						document.getElementById("play").style.display = "none";
-					} else {
-					}
-				});
-				let sever = starterchoose();
-				boxs.forEach((element) => {
-					element.onclick = function () {
-						backgroundchange();
+        .modal * {
+            color: black;
+        }
 
-						if (counter == starter.X.length -1) {
-							restart();
-						} else {
-							if (element.textContent == '') {
-									counter++;
-							}
-						}
+        .play-btn {
+            padding: 1rem 2rem;
+            font-size: 30px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
 
-if (boxarray[element.attributes.value.textContent] == "") {
-	if (sever == 1) {
-		element.textContent = starter.X[counter];
-	} else if (sever == 2) {
-		element.textContent = starter.O[counter];
-	}
-	boxarray[element.attributes.value.textContent] =
-	element.textContent;	
-}
-						
-						if (
-							(boxarray[0] == "X" &&
-								boxarray[1] == "X" &&
-								boxarray[2] == "X") ||
-							(boxarray[0] == "O" && boxarray[1] == "O" && boxarray[2] == "O")
-						) {
-							beat.play()
-							line.style.display = "inline";
-							line.style.top = "14%";
-							line.style.left = "5.5%";
-							line.style.rotate = "0deg";
-							line.style.transformOrigin = "center";
-							line.style.width = "100%";
+        .play-btn:active {
+            background-color: #c0392b;
+        }
 
-							setTimeout(() => {
-								scorecounter(boxarray[0]);
-								restart();
-							}, 1000);
-						} else if (
-							(boxarray[3] == "X" &&
-								boxarray[4] == "X" &&
-								boxarray[5] == "X") ||
-							(boxarray[3] == "O" && boxarray[4] == "O" && boxarray[5] == "O")
-						) {
-							beat.play()
-							line.style.display = "inline";
-							line.style.top = "48%";
-							line.style.left = "5.5%";
-							line.style.rotate = "0deg";
-							line.style.transformOrigin = "center";
-							line.style.width = "100%";
+        .warning {
+            color: red;
+        }
 
-							setTimeout(() => {
-								scorecounter(boxarray[3]);
-								restart();
-							}, 1000);
-						} else if (
-							(boxarray[6] == "X" &&
-								boxarray[7] == "X" &&
-								boxarray[8] == "X") ||
-							(boxarray[6] == "O" && boxarray[7] == "O" && boxarray[8] == "O")
-						) {
-							beat.play()
-							line.style.display = "inline";
-							line.style.top = "82%";
-							line.style.left = "5.5%";
-							line.style.rotate = "0deg";
-							line.style.transformOrigin = "center";
-							line.style.width = "100%";
+        .content {
+            font-size: 30px;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-							setTimeout(() => {
-								scorecounter(boxarray[6]);
-								restart();
-							}, 1000);
-						} else if (
-							(boxarray[0] == "X" &&
-								boxarray[3] == "X" &&
-								boxarray[6] == "X") ||
-							(boxarray[0] == "O" && boxarray[3] == "O" && boxarray[6] == "O")
-						) {
-							beat.play()
-							line.style.display = "inline";
-							line.style.rotate = "90deg";
-							line.style.transformOrigin = "left";
-							line.style.top = "5.5%";
-							line.style.left = "16%";
-							line.style.width = "100%";
+        .player-select {
+            display: flex;
+        }
 
-							setTimeout(() => {
-								scorecounter(boxarray[0]);
-								restart();
-							}, 1000);
-						} else if (
-							(boxarray[1] == "X" &&
-								boxarray[4] == "X" &&
-								boxarray[7] == "X") ||
-							(boxarray[1] == "O" && boxarray[4] == "O" && boxarray[7] == "O")
-						) {
-							beat.play()
-							line.style.display = "inline";
-							line.style.rotate = "90deg";
-							line.style.transformOrigin = "left";
-							line.style.top = "5.5%";
-							line.style.left = "51%";
-							line.style.width = "100%";
+        .player-select label {
+            padding: 0.5rem 2rem;
+            background-color: white;
+            cursor: pointer;
+        }
 
-							setTimeout(() => {
-								scorecounter(boxarray[1]);
-								restart();
-							}, 1000);
-						} else if (
-							(boxarray[2] == "X" &&
-								boxarray[5] == "X" &&
-								boxarray[8] == "X") ||
-							(boxarray[2] == "O" && boxarray[5] == "O" && boxarray[8] == "O")
-						) {
-							beat.play()
-							line.style.display = "inline";
-							line.style.rotate = "90deg";
-							line.style.transformOrigin = "left";
-							line.style.top = "5.5%";
-							line.style.left = "84%";
-							line.style.width = "100%";
+        .player-select label:first-child {
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
 
-							setTimeout(() => {
-								scorecounter(boxarray[2]);
-								restart();
-							}, 1000);
-						} else if (
-							(boxarray[0] == "X" &&
-								boxarray[4] == "X" &&
-								boxarray[8] == "X") ||
-							(boxarray[0] == "O" && boxarray[4] == "O" && boxarray[8] == "O")
-						) {
-							beat.play()
-							line.style.display = "inline";
-							line.style.rotate = "45deg";
-							line.style.top = "48%";
-							line.style.left = "-5%";
-							line.style.transformOrigin = "center";
-							line.style.width = "110%";
+        .player-select label:last-child {
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            border-left: 1px solid #222;
+        }
 
-							setTimeout(() => {
-								scorecounter(boxarray[0]);
-								restart();
-							}, 1000);
-						} else if (
-							(boxarray[2] == "X" &&
-								boxarray[4] == "X" &&
-								boxarray[6] == "X") ||
-							(boxarray[2] == "O" && boxarray[4] == "O" && boxarray[6] == "O")
-						) {
-							beat.play()
-							line.style.display = "inline";
-							line.style.rotate = "-45deg";
-							line.style.top = "48%";
-							line.style.right = "-5%";
-							line.style.transformOrigin = "center";
-							line.style.width = "110%";
+        .player-select input {
+            display: none;
+        }
 
-							setTimeout(() => {
-								scorecounter(boxarray[2]);
-								restart();
-							}, 1000);
-						}
-					};
-				});
-			}
+        #score {
+            margin: 0;
+            font-size: 50px;
+        }
 
-			function starterchoose() {
-				if (XOstarter[0].style.backgroundColor === "blue") {
-					return (starterchoosen = 1);
-				} else if (XOstarter[1].style.backgroundColor === "blue") {
-					return (starterchoosen = 2);
-				} else {
-					return "choose starter";
-				}
-			}
-			function restart() {
-				boxs.forEach((element) => {
-					element.textContent = "";
-				});
-				counter = -1;
-				starterchoosen = 0;
-				sever = 0;
-				boxarray = ["", "", "", "", "", "", "", "", ""];
-				document.getElementById("play").style.display = "grid";
-				line.style.display = "none";
-			}
-			function scorecounter(sever) {
-				if (sever == "X") {
-					scoreX++;
-					score.textContent = `${scoreX}:${scoreO}`;
-				} else if (sever == "O") {
-					scoreO++;
-					score.textContent = `${scoreX}:${scoreO}`;
-				}
-			}
-			function backgroundchange() {
-				if (document.body.style.backgroundColor == "rgb(255, 141, 141)") {
-					document.body.style.backgroundColor = "rgb(141, 164, 255)";
-				} else {
-					document.body.style.backgroundColor = "rgb(255, 141, 141)";
-				}
-			}
-		</script>
-	</body>
+        .game-container {
+            margin: 2rem auto;
+            width: 300px;
+            height: 300px;
+            position: relative;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 0.25rem;
+            height: 100%;
+        }
+
+        .cell {
+            background-color: transparent;
+            border: 0.25rem solid #333;
+            display: grid;
+            place-items: center;
+            font-size: 60px;
+            font-weight: 600;
+            color: #222;
+            cursor: pointer;
+        }
+
+        .cell:nth-child(3n + 1) {
+            border-left: 0;
+        }
+
+        .cell:nth-child(3n) {
+            border-right: 0;
+        }
+
+        .cell:nth-child(-n + 3) {
+            border-top: 0;
+        }
+
+        .cell:nth-child(n + 7) {
+            border-bottom: 0;
+        }
+
+        #play-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.202);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+        }
+
+        #play-overlay button {
+            color: white;
+            padding: 0.3rem 1rem;
+            font-size: 30px;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            font-family: inherit;
+            text-transform: capitalize;
+            cursor: pointer;
+        }
+
+        #play-overlay button:active {
+            background-color: #2980b9;
+        }
+
+        #win-line {
+            position: absolute;
+            background-color: white;
+            width: 88%;
+            height: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="info" class="modal">
+        <h1>Welcome to XO Game</h1>
+        <p>XO game made by Daniel Yohannes for entertainment and to test programming skills.</p>
+        <h3>How to Play</h3>
+        <ol>
+            <li>Choose who starts (X or O) at the top</li>
+            <li>Click "Play" and then click on the grid cells to make your move</li>
+        </ol>
+        <p>If there's a tie or no winner, click on any cell to restart</p>
+        <button onclick="infoOff()" class="play-btn">Play</button>
+        <p class="warning">If nothing is working, refresh the page</p>
+    </div>
+
+    <main class="content">
+        <div class="player-select">
+            <label for="player-x"><input type="radio" name="player" id="player-x" value="X">X</label>
+            <label for="player-o"><input type="radio" name="player" id="player-o" value="O">O</label>
+        </div>
+        <p id="score">0:0</p>
+    </main>
+
+    <div class="game-container">
+        <div class="game-grid">
+        </div>
+        <div id="play-overlay"><button onclick="startGame()">Play</button></div>
+        <div id="win-line"></div>
+    </div>
+
+    <script>
+        const gameContainer = document.querySelector('.game-container');
+        const gameGrid = document.querySelector('.game-grid');
+        const playerSelects = document.querySelectorAll('.player-select input');
+        const playOverlay = document.getElementById('play-overlay');
+        const winLine = document.getElementById('win-line');
+        const scoreElement = document.getElementById('score');
+
+        let currentPlayer = 'X';
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
+        let gameActive = false;
+        let scoreX = 0;
+        let scoreO = 0;
+
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        function createGameBoard() {
+            gameGrid.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.dataset.index = i;
+                cell.addEventListener('click', handleCellClick);
+                gameGrid.appendChild(cell);
+            }
+        }
+
+        function startGame() {
+            gameActive = true;
+            currentPlayer = document.querySelector('.player-select input:checked').value;
+            playOverlay.style.display = 'none';
+            createGameBoard();
+        }
+
+        function handleCellClick(e) {
+            const cell = e.target;
+            const index = parseInt(cell.dataset.index);
+
+            if (gameBoard[index] !== '' || !gameActive) return;
+
+            gameBoard[index] = currentPlayer;
+            cell.textContent = currentPlayer;
+            
+            if (checkWin()) {
+                endGame(false);
+            } else if (gameBoard.every(cell => cell !== '')) {
+                endGame(true);
+            } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                toggleBackgroundColor();
+            }
+        }
+
+        function checkWin() {
+            return winPatterns.some(pattern => {
+                const [a, b, c] = pattern;
+                return gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c];
+            });
+        }
+
+        function endGame(draw) {
+            gameActive = false;
+            if (!draw) {
+                updateScore(currentPlayer);
+                showWinLine();
+            }
+            setTimeout(() => {
+                resetGame();
+            }, 1500);
+        }
+
+        function updateScore(winner) {
+            if (winner === 'X') scoreX++;
+            else scoreO++;
+            scoreElement.textContent = `${scoreX}:${scoreO}`;
+        }
+
+        function showWinLine() {
+            winLine.style.display = 'block';
+        }
+
+        function resetGame() {
+            gameBoard = ['', '', '', '', '', '', '', '', ''];
+            playOverlay.style.display = 'grid';
+            winLine.style.display = 'none';
+            createGameBoard();
+        }
+
+        function toggleBackgroundColor() {
+            document.body.style.backgroundColor = 
+                document.body.style.backgroundColor === 'rgb(231, 76, 60)' 
+                    ? '#3498db'
+                    : '#e74c3c';
+        }
+
+        function infoOff() {
+            document.getElementById('info').style.display = 'none';
+        }
+
+        createGameBoard();
+        playerSelects.forEach(select => select.addEventListener('change', () => {
+            playerSelects.forEach(s => s.parentElement.style.backgroundColor = 'white');
+            select.parentElement.style.backgroundColor = 'blue';
+        }));
+    </script>
+</body>
 </html>
