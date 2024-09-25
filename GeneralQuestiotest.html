@@ -15,6 +15,8 @@
 				place-items: center;
 				gap: 1rem;
 				position: relative;
+				background-color: #3498db;
+				transition: background-color 0.5s ease;
 			}
 			.container {
 				border: 1px solid black;
@@ -56,17 +58,17 @@
 				min-width: 36%;
 				padding-block: 0.5rem;
 				font-size: 18px;
-				background-color: blue;
+				background-color: #2980b9;
 				border: none;
 				border-radius: 5px;
 				font-weight: 800;
 				color: white;
 
 				&:hover {
-					background-color: rgb(45, 45, 252);
+					background-color: #2980b9;
 				}
 				&:active {
-					background-color: rgb(10, 217, 21);
+					background-color: #c0392b;
 				}
 			}
 			#markcontiner {
@@ -96,7 +98,7 @@
 				font-weight: 600;
 			}
 			.warning {
-				background-color: red;
+				background-color: #e74c3c;
 				font-size: 18px;
 				font-family: sans-serif;
 				width: 442px;
@@ -109,28 +111,28 @@
 	</head>
 	<body>
 		<div class="container" id="container">
-			<p class="margi">Q1) In what galaxy is our solar system located?</p>
+			<p class="margi">Q1) What is the largest planet in our solar system?</p>
 			<div id="Q1">
-				<label for="A1" Value="0"><span>A)</span> The Milky Way</label>
-				<label for="B1" Value="0"><span>B)</span> Andromeda</label>
-				<label for="C1" Value="0"><span>C)</span> Antennae</label>
-				<label for="D1" Value="0"><span>D)</span> Black Eye</label>
+				<label for="A1" Value="0"><span>A)</span> Mars</label>
+				<label for="B1" Value="0"><span>B)</span> Jupiter</label>
+				<label for="C1" Value="0"><span>C)</span> Saturn</label>
+				<label for="D1" Value="0"><span>D)</span> Neptune</label>
 			</div>
-			<p class="margi">Q2) What type of gas is absorbed by plants?</p>
+			<p class="margi">Q2) Which country is home to the Great Barrier Reef?</p>
 
 			<div id="Q2">
-				<label for="A2" value="0"> <span>A)</span> Oxygen</label>
-				<label for="B2" value="0"> <span>B)</span> Nitrogen</label>
-				<label for="C2" value="0"> <span>C)</span> CarbondiOxide</label>
-				<label for="D2" value="0"> <span>D)</span> Water</label>
+				<label for="A2" value="0"> <span>A)</span> Brazil</label>
+				<label for="B2" value="0"> <span>B)</span> Indonesia</label>
+				<label for="C2" value="0"> <span>C)</span> Australia</label>
+				<label for="D2" value="0"> <span>D)</span> Mexico</label>
 			</div>
-			<p class="margi">Q3) Which planet is known as the "Red Planet"?</p>
+			<p class="margi">Q3) Who wrote the play "Romeo and Juliet"?</p>
 
 			<div id="Q3">
-				<label for="A3" value="0"> <span>A)</span> Jupiter</label>
-				<label for="B3" value="0"> <span>B)</span> mars</label>
-				<label for="C3" value="0"> <span>C)</span> moon</label>
-				<label for="D3" value="0"> <span>D)</span> satern</label>
+				<label for="A3" value="0"> <span>A)</span> Charles Dickens</label>
+				<label for="B3" value="0"> <span>B)</span> William Shakespeare</label>
+				<label for="C3" value="0"> <span>C)</span> Jane Austen</label>
+				<label for="D3" value="0"> <span>D)</span> Mark Twain</label>
 			</div>
 			<p class="margi">Q4) What is the shortest month of the year?</p>
 
@@ -223,7 +225,7 @@
 					label.onclick = function () {
 						element.forEach((btn) => {
 							btn.style.fontWeight = "normal";
-							btn.style.backgroundColor = "white";
+							btn.style.backgroundColor = "transparent";
 							btn.style.color = "black";
 						});
 						this.style.fontWeight = "600";
@@ -254,7 +256,7 @@
 			}
 			function resultchecker(answers) {
 				let answercontainer = {
-					Q1: "A1",
+					Q1: "B1",
 					Q2: "C2",
 					Q3: "B3",
 					Q4: "B4",
@@ -314,35 +316,30 @@
 				}
 				else{
 					answers[6].style.backgroundColor = "red";
-				}
+				}	
 				if (answers[7].attributes.for.textContent == answercontainer.Q8) {
 					result++;
 					answers[7].style.backgroundColor = "rgb(9, 255, 10)";
 				}
 				else{
 					answers[7].style.backgroundColor = "red";
-				}
+				}	
 				if (answers[8].attributes.for.textContent == answercontainer.Q9) {
 					result++;
 					answers[8].style.backgroundColor = "rgb(9, 255, 10)";
 				}
 				else{
 					answers[8].style.backgroundColor = "red";
-				}
+				}		
 				if (answers[9].attributes.for.textContent == answercontainer.Q10) {
 					result++;
 					answers[9].style.backgroundColor = "rgb(9, 255, 10)";
 				}
 				else{
 					answers[9].style.backgroundColor = "red";
-				}
+				}	
 				mark.textContent = result;
-
-				const res10 = document.getElementById("r10");
-				const res98 = document.getElementById("r9-8");
-				const res76 = document.getElementById("r7-6");
-
 			}
-		</script>
-	</body>
-</html>
+			</script>
+		</body>
+	</html>		
