@@ -15,11 +15,12 @@
 				place-items: center;
 				gap: 1rem;
 				position: relative;
-				background-color: #3498db;
+				background-color: #1c1c1c;
 				transition: background-color 0.5s ease;
+				color: #e0e0e0; /* Add this line to set the default text color */
 			}
 			.container {
-				border: 1px solid black;
+				border: 1px solid rgb(255, 250, 250);
 				margin-top: 20px;
 				padding: 1rem;
 				border-radius: 5px;
@@ -28,6 +29,7 @@
 					font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
 						Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
 						sans-serif;
+					color: #ffffff;
 				}
 				div {
 					display: grid;
@@ -43,13 +45,14 @@
 						display: flex;
 						align-items: center;
 						gap: 8px;
-						width: 134px;
+						width: 100%;
 						padding: 0.4rem;
 						border-radius: 4px;
 						text-transform: capitalize;
+						color: #e0e0e0;
 						span {
 							font-size: 16px;
-							color: black;
+							color: rgb(226, 226, 226);
 						}
 					}
 				}
@@ -62,7 +65,7 @@
 				border: none;
 				border-radius: 5px;
 				font-weight: 800;
-				color: white;
+				color: rgb(255, 255, 255);
 
 				&:hover {
 					background-color: #2980b9;
@@ -74,7 +77,7 @@
 			#markcontiner {
 				display: flex;
 				margin-block: 10px;
-				border: 1px solid black;
+				border: 1px solid rgb(255, 255, 255);
 				width: 100px;
 				height: 100px;
 				border-radius: 50%;
@@ -134,64 +137,54 @@
 				<label for="C3" value="0"> <span>C)</span> Jane Austen</label>
 				<label for="D3" value="0"> <span>D)</span> Mark Twain</label>
 			</div>
-			<p class="margi">Q4) What is the shortest month of the year?</p>
-
+			<p class="margi">Q4) What is the largest ocean on Earth?</p>
 			<div id="Q4">
-				<label for="A4" value="0"> <span>A)</span> may</label>
-				<label for="B4" value="0"> <span>B)</span> fabruary</label>
-				<label for="C4" value="0"> <span>C)</span> january</label>
-				<label for="D4" value="0"> <span>D)</span> july</label>
+				<label for="A4" value="0"> <span>A)</span> Atlantic Ocean</label>
+				<label for="B4" value="0"> <span>B)</span> Indian Ocean</label>
+				<label for="C4" value="0"> <span>C)</span> Arctic Ocean</label>
+				<label for="D4" value="0"> <span>D)</span> Pacific Ocean</label>
 			</div>
-			<p class="margi">Q5) What language contains the most words?</p>
-
+			<p class="margi">Q5) Who painted the Mona Lisa?</p>
 			<div id="Q5">
-				<label for="A5" value="0"> <span>A)</span> amharic</label>
-				<label for="B5" value="0"> <span>B)</span> mandarin</label>
-				<label for="C5" value="0"> <span>C)</span> british</label>
-				<label for="D5" value="0"> <span>D)</span> english</label>
+				<label for="A5" value="0"> <span>A)</span> Vincent van Gogh</label>
+				<label for="B5" value="0"> <span>B)</span> Leonardo da Vinci</label>
+				<label for="C5" value="0"> <span>C)</span> Pablo Picasso</label>
+				<label for="D5" value="0"> <span>D)</span> Michelangelo</label>
 			</div>
-			<p class="margi">
-				Q6) What is the chemical symbol for the element mercury?
-			</p>
-
+			<p class="margi">Q6) Which planet is known as the "Red Planet"?</p>
 			<div id="Q6">
-				<label for="A6" value="0"> <span>A)</span> W</label>
-				<label for="B6" value="0"> <span>B)</span> Mc</label>
-				<label for="C6" value="0"> <span>C)</span> Hg</label>
-				<label for="D6" value="0"> <span>D)</span> Mt</label>
+				<label for="A6" value="0"> <span>A)</span> Venus</label>
+				<label for="B6" value="0"> <span>B)</span> Mars</label>
+				<label for="C6" value="0"> <span>C)</span> Jupiter</label>
+				<label for="D6" value="0"> <span>D)</span> Saturn</label>
 			</div>
-			<p class="margi">Q7) How long is the small intestine?</p>
-
+			<p class="margi">Q7) What is the capital city of Japan?</p>
 			<div id="Q7">
-				<label for="A7"> <span>A)</span> 7m</label>
-				<label for="B7"> <span>B)</span> 10m</label>
-				<label for="C7"> <span>C)</span> 5m</label>
-				<label for="D7"> <span>D)</span> 9m</label>
+				<label for="A7"> <span>A)</span> Seoul</label>
+				<label for="B7"> <span>B)</span> Beijing</label>
+				<label for="C7"> <span>C)</span> Tokyo</label>
+				<label for="D7"> <span>D)</span> Bangkok</label>
 			</div>
-			<p class="margi">Q8) How many chambers does the human heart have?</p>
-
+			<p class="margi">Q8) Who wrote the play "Hamlet"?</p>
 			<div id="Q8">
-				<label for="A8"> <span>A)</span> 4</label>
-				<label for="B8"> <span>B)</span> 2</label>
-				<label for="C8"> <span>C)</span> 6</label>
-				<label for="D8"> <span>D)</span> 1</label>
+				<label for="A8"> <span>A)</span> Charles Dickens</label>
+				<label for="B8"> <span>B)</span> William Shakespeare</label>
+				<label for="C8"> <span>C)</span> Jane Austen</label>
+				<label for="D8"> <span>D)</span> Mark Twain</label>
 			</div>
-			<p class="margi">
-				Q9) Name the country known as the Land of the Rising Sun.
-			</p>
-
+			<p class="margi">Q9) What is the chemical symbol for gold?</p>
 			<div id="Q9">
-				<label for="A9"> <span>A)</span> russia</label>
-				<label for="B9"> <span>B)</span> india</label>
-				<label for="C9"> <span>C)</span> china</label>
-				<label for="D9"> <span>D)</span> japan</label>
+				<label for="A9"> <span>A)</span> Au</label>
+				<label for="B9"> <span>B)</span> Ag</label>
+				<label for="C9"> <span>C)</span> Fe</label>
+				<label for="D9"> <span>D)</span> Cu</label>
 			</div>
 			<p class="margi">Q10) Which bird lays the largest eggs?</p>
 			<div id="Q10">
-				<label for="A10"> <span>A)</span> giraffe</label>
-				<label for="B10"> <span>B)</span> chicken</label>
-				<label for="C10"> <span>C)</span> ostrich</label>
-				<label for="D10"> <span>D)</span> hawk</label>
+				<label for="A10"> <span>A)</span> Penguin</label>
+				<label for="B10"> <span>B)</span> Ostrich</label>
+				<label for="C10"> <span>C)</span> Eagle</label>
+				<label for="D10"> <span>D)</span> Emu</label>
 			</div>
 		</div>
 		<button onclick="Submit()" id="button">Submit</button>
@@ -226,7 +219,7 @@
 						element.forEach((btn) => {
 							btn.style.fontWeight = "normal";
 							btn.style.backgroundColor = "transparent";
-							btn.style.color = "black";
+							btn.style.color = "white";
 						});
 						this.style.fontWeight = "600";
 						this.style.backgroundColor = "blue";
@@ -259,87 +252,77 @@
 					Q1: "B1",
 					Q2: "C2",
 					Q3: "B3",
-					Q4: "B4",
-					Q5: "D5",
-					Q6: "C6",
-					Q7: "A7",
-					Q8: "A8",
-					Q9: "D9",
-					Q10: "C10",
+					Q4: "D4",
+					Q5: "B5",
+					Q6: "B6",
+					Q7: "C7",
+					Q8: "B8",
+					Q9: "A9",
+					Q10: "B10",
 				};
 				let result = 0;
 				if (answers[0].attributes.for.textContent == answercontainer.Q1) {
 					result++;
 					answers[0].style.backgroundColor = "rgb(9, 255, 10)";
-				}
-				else{
+				} else {
 					answers[0].style.backgroundColor = "red";
 				}
 				if (answers[1].attributes.for.textContent == answercontainer.Q2) {
 					result++;
 					answers[1].style.backgroundColor = "rgb(9, 255, 10)";
-				}
-				else{
+				} else {
 					answers[1].style.backgroundColor = "red";
 				}
 				if (answers[2].attributes.for.textContent == answercontainer.Q3) {
 					result++;
 					answers[2].style.backgroundColor = "rgb(9, 255, 10)";
-				}
-				else{
+				} else {
 					answers[2].style.backgroundColor = "red";
 				}
 				if (answers[3].attributes.for.textContent == answercontainer.Q4) {
 					result++;
 					answers[3].style.backgroundColor = "rgb(9, 255, 10)";
-				}
-				else{
+				} else {
 					answers[3].style.backgroundColor = "red";
 				}
 				if (answers[4].attributes.for.textContent == answercontainer.Q5) {
 					result++;
 					answers[4].style.backgroundColor = "rgb(9, 255, 10)";
-				}
-				else{
+				} else {
 					answers[4].style.backgroundColor = "red";
 				}
 				if (answers[5].attributes.for.textContent == answercontainer.Q6) {
 					result++;
 					answers[5].style.backgroundColor = "rgb(9, 255, 10)";
-				}
-				else{
+				} else {
 					answers[5].style.backgroundColor = "red";
 				}
 				if (answers[6].attributes.for.textContent == answercontainer.Q7) {
 					result++;
 					answers[6].style.backgroundColor = "rgb(9, 255, 10)";
-				}
-				else{
+				} else {
 					answers[6].style.backgroundColor = "red";
-				}	
+				}
 				if (answers[7].attributes.for.textContent == answercontainer.Q8) {
 					result++;
 					answers[7].style.backgroundColor = "rgb(9, 255, 10)";
-				}
-				else{
+				} else {
 					answers[7].style.backgroundColor = "red";
-				}	
+				}
 				if (answers[8].attributes.for.textContent == answercontainer.Q9) {
 					result++;
 					answers[8].style.backgroundColor = "rgb(9, 255, 10)";
-				}
-				else{
+				} else {
 					answers[8].style.backgroundColor = "red";
-				}		
+				}
 				if (answers[9].attributes.for.textContent == answercontainer.Q10) {
 					result++;
 					answers[9].style.backgroundColor = "rgb(9, 255, 10)";
-				}
-				else{
+				} else {
 					answers[9].style.backgroundColor = "red";
-				}	
+				}
 				mark.textContent = result;
 			}
-			</script>
-		</body>
-	</html>		
+		</script>
+	</body>
+</html>

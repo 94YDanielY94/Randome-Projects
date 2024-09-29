@@ -3,382 +3,281 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Snake game</title>
+		<title>Snake Game</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
-			rel="stylesheet"
-		/>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 		<style>
 			body {
-				position: relative;
-				background-color: #444;
+				background: linear-gradient(135deg, #1a1a2e, #16213e);
+				font-family: 'Poppins', sans-serif;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				margin: 0;
+				color: #e94560;
 			}
 			#info {
 				position: absolute;
-				background-color: #eeeeee22;
-				backdrop-filter: blur(20px);
+				background-color: rgba(26, 26, 46, 0.95);
+				backdrop-filter: blur(10px);
 				z-index: 100;
-				height: 500px;
+				height: 100vh;
 				text-align: center;
 				width: 100%;
-				* {
-					color: white;
-				}
-				button {
-					padding: 1rem 2rem;
-					font-size: 30px;
-					background-color: black;
-					border: none;
-					border-radius: 8px;
-					&:active {
-						background-color: #444;
-					}
-				}
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				transition: all 0.5s ease;
 			}
-			.wraper {
-				border: 3px solid black;
-				width: fit-content;
-				margin-inline: auto;
-				/* padding: .6rem; */
-				color: white;
+			#info h1 {
+				font-size: 3em;
+				margin-bottom: 20px;
+				color: #e94560;
+				text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+			}
+			#info p {
+				font-size: 1.2em;
+				max-width: 600px;
+				margin: 10px auto;
+				color: #0f3460;
+			}
+			#info button, #gameLevel {
+				padding: 1rem 2rem;
+				font-size: 18px;
+				background-color: #e94560;
+				color: #1a1a2e;
+				border: none;
+				border-radius: 50px;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				margin-top: 20px;
+				font-weight: 600;
+			}
+			#info button:hover, #gameLevel:hover {
+				background-color: #0f3460;
+				color: #e94560;
+				transform: scale(1.05);
+			}
+			.wrapper {
+				border: 3px solid #e94560;
+				padding: 20px;
+				background-color: rgba(22, 33, 62, 0.8);
+				color: #e94560;
+				border-radius: 20px;
+				/* Remove this line:
+				box-shadow: 0 0 20px rgba(233, 69, 96, 0.3);
+				*/
 			}
 			.content {
 				display: flex;
 				justify-content: space-between;
-				font-size: 26px;
-				padding-inline: 1rem;
-				#playlevel {
-					select {
-						padding: 0.3rem 0.7rem;
-						background-color: #eee;
-						font-weight: 700;
-					}
-				}
+				font-size: 20px;
+				padding: 10px;
+				align-items: center;
 			}
-			.gamecontainer {
-				/* background: linear-gradient(90deg,rgba(0, 128, 0, 0.563) 50%,rgba(144, 238, 144, 0.515) 50%),linear-gradient(rgba(0, 128, 0, 0.869) 50%,lightgreen 50%); */
-				background-color: rgb(11, 11, 11);
-				background-size: 40px 40px;
+			#gameContainer {
+				background-color: #0f3460;
 				width: 400px;
 				height: 400px;
 				position: relative;
 				overflow: hidden;
-				--snakesize: 10px;
-				#snakehade {
-					background-color: rgb(255, 255, 255);
-					width: var(--snakesize);
-					height: var(--snakesize);
-					position: absolute;
-					border-radius: 3px;
-				}
-				.newtile,
-				#snaketile1 {
-					background-color: rgb(255, 255, 255);
-					width: var(--snakesize);
-					height: var(--snakesize);
-					position: absolute;
-					border-radius: 3px;
-					clip-path: polygon(
-						0 25%,
-						25% 24%,
-						25% 0,
-						75% 0,
-						75% 25%,
-						100% 25%,
-						100% 75%,
-						75% 75%,
-						75% 100%,
-						25% 99%,
-						25% 75%,
-						0 75%
-					);
-				}
-				#Snakfood {
-					background-color: rgb(255, 0, 0);
-					width: var(--snakesize);
-					height: var(--snakesize);
-					position: absolute;
-					border-radius: 50%;
-				}
+				border-radius: 10px;
+				/* Remove this line:
+				box-shadow: inset 0 0 10px rgba(233, 69, 96, 0.5);
+				*/
+			}
+			.snake-part {
+				background-color: #e94560;
+				width: 10px;
+				height: 10px;
+				position: absolute;
+				border-radius: 3px; /* Change this from 50% to 3px for rounded corners */
+				transition: all 0.1s linear;
+			}
+			#snakeFood {
+				background-color: #ffd700;
+				width: 10px;
+				height: 10px;
+				position: absolute;
+				border-radius: 50%;
+				/* Remove this line:
+				box-shadow: 0 0 5px #ffd700;
+				*/
+			}
+			@keyframes pulse {
+				0% { transform: scale(1); }
+				50% { transform: scale(1.1); }
+				100% { transform: scale(1); }
+			}
+			#snakeFood {
+				animation: pulse 0.8s infinite;
 			}
 		</style>
 	</head>
 	<body>
-		<div  id="info">
-			<h1>--------------- Wellcome to Snake Game ---------------</h1>
-			<p>
-				Sanke game made by Daniel Yohannes is made for entertainment and to testing ability of my programming skills
-			</p>
-			<h3>To play</h3>
-			<p>do not Click 'W,A,S,D' keys</p>
-			<p>Click the Arrow keys on the keborde</p>
-			<p>you can choose you dificulty level at the bottom of the game befor clicking any arrow after clicking play</p>
-			<h2>Dont click any arrow before clicking play button</h2>
-			<button onclick="infooff()">Play</button>
-			<h1 style="color: red;"> if noting is working refesh the page</h1>
+		<div id="info">
+			<h1>Welcome to Snake Game</h1>
+			<p>Snake game made by Daniel Yohannes for entertainment and to test programming skills</p>
+			<h3>How to Play</h3>
+			<p>Use the Arrow keys on the keyboard to control the snake</p>
+			<p>Choose your difficulty level before starting:</p>
+			<select id="gameLevel" onchange="updateLevel()">
+				<option value="Easy">Easy</option>
+				<option value="Medium">Medium</option>
+				<option value="Hard">Hard</option>
+			</select>
+			<button onclick="startGame()">Play</button>
+			<p style="color: #e94560;">Don't press any arrow keys before clicking play!</p>
 		</div>
-		<div class="wraper" id="Gamewarper">
-			<div class="gamecontainer" id="container">
-				<div id="snaketile1"></div>
-				<div id="snakehade"></div>
-				<div id="Snakfood"></div>
-			</div>
+		<div class="wrapper" id="gameWrapper">
+			<div id="gameContainer"></div>
 			<div class="content">
-				<p id="score">score: 0</p>
-				<p id="playlevel">
-					Game level:
-					<select name="Gamelevel" id="gamelevel">
-						<option value="Easy">Easy</option>
-						<option value="Mid">Mid</option>
-						<option value="Hard">Hard</option>
-					</select>
-				</p>
+				<p id="score">Score: 0</p>
+				<p id="currentLevel">Level: Easy</p>
 			</div>
 		</div>
 
 		<script>
-			function infooff() {
-				document.getElementById("info").style.display = "none";
-			}
-			const gamelevel = document.getElementById("gamelevel");
-			const playlevel = document.getElementById("playlevel");
-			const gamecontainer = document.getElementById("container");
-			const snakehade = document.getElementById("snakehade");
-			const Snakefood = document.getElementById("Snakfood");
-			const snaketile1 = document.getElementById("snaketile1");
-			const scorediplay = document.getElementById("score");
-			const moveamount = 10;
-
-			let x = 10;
-			let y = 0;
-			let xpositionarray = [];
-			let ypositionarray = [];
-			let tilearray = [];
-			let tileXposarray = [];
-			let tileYposarray = [];
-			let Snakefoodx;
-			let Snakefoody;
-			let tileXpos;
-			let tileYpos;
-			let moveupid = null;
-			let movedownid = null;
-			let moveleftid = null;
-			let moverightid = null;
-			let speed;
-			let tilecounter = 1;
-			let privkey;
-			let newkey;
+			const gameContainer = document.getElementById('gameContainer');
+			const scoreDisplay = document.getElementById('score');
+			const gameLevelSelect = document.getElementById('gameLevel');
+			const currentLevelDisplay = document.getElementById('currentLevel');
+			const infoDiv = document.getElementById('info');
+			
+			let snake = [{x: 10, y: 0}];
+			let food = {};
+			let direction = 'right';
+			let gameLoop;
 			let score = 0;
+			let currentLevel = 'Easy';
 
-			snakehade.style.top = `${y}px`;
-			snakehade.style.left = `${x}px`;
-
-			Snakefood.style.top = `${Randomreturn()}px`;
-			Snakefood.style.left = `${Randomreturn()}px`;
-
-			var numb = Snakefood.style.left.match(/\d/g);
-			Snakefoodx = numb.join("");
-			var numb = Snakefood.style.top.match(/\d/g);
-			Snakefoody = numb.join("");
-
-			function Randomreturn() {
-				let array = [];
-				for (let index = 1; index < 41; index++) {
-					let seq = 10 * (index - 1);
-					array.push(seq);
-				}
-				tileXposarray.forEach((element) => {
-					element = Number(element);
-				});
-				tileYposarray.forEach((element) => {
-					element = Number(element);
-				});
-				let random = array[Math.floor(Math.random() * 40)];
-				return random;
+			function startGame() {
+				infoDiv.style.display = 'none';
+				resetGame();
+				createFood();
+				gameLoop = setInterval(moveSnake, getSpeed());
+				document.addEventListener('keydown', changeDirection);
 			}
 
-			document.addEventListener("keydown", movment);
-
-			function movment(event) {
-				if (event.key.startsWith("Arrow")) {
-					switch (gamelevel.value) {
-						case "Easy":
-							speed = 160;
-							break;
-						case "Mid":
-							speed = 115;
-							break;
-						case "Hard":
-							speed = 60;
-							break;
-					}
-					event.preventDefault();
-					Colusion();
-					switch (event.key) {
-						case "ArrowUp":
-							newkey = event.key;
-							if (privkey == newkey || privkey == "ArrowDown") {
-							} else {
-								moveupid = setInterval(() => {
-									y -= moveamount;
-									Colusion();
-									assign();
-									xpositionarray.push(x);
-									ypositionarray.push(y);
-								}, speed);
-								clearInterval(movedownid);
-								clearInterval(moveleftid);
-								clearInterval(moverightid);
-							}
-							break;
-						case "ArrowDown":
-							newkey = event.key;
-							if (privkey == newkey || privkey == "ArrowUp") {
-							} else {
-								movedownid = setInterval(() => {
-									y += moveamount;
-									Colusion();
-									assign();
-									xpositionarray.push(x);
-									ypositionarray.push(y);
-									console.log("a");
-								}, speed);
-								clearInterval(moveupid);
-								clearInterval(moveleftid);
-								clearInterval(moverightid);
-							}
-							break;
-						case "ArrowRight":
-							newkey = event.key;
-							if (privkey == newkey || privkey == "ArrowLeft") {
-							} else {
-								moveleftid = setInterval(() => {
-									x += moveamount;
-									Colusion();
-									assign();
-									xpositionarray.push(x);
-									ypositionarray.push(y);
-								}, speed);
-								clearInterval(moveupid);
-								clearInterval(moverightid);
-								clearInterval(movedownid);
-							}
-							break;
-						case "ArrowLeft":
-							newkey = event.key;
-							if (privkey == newkey || privkey == "ArrowRight") {
-							} else {
-								moverightid = setInterval(() => {
-									x -= moveamount;
-									Colusion();
-									assign();
-									xpositionarray.push(x);
-									ypositionarray.push(y);
-								}, speed);
-								clearInterval(moveleftid);
-								clearInterval(moveupid);
-								clearInterval(movedownid);
-							}
-							break;
-					}
-					privkey = event.key;
-				}
-			}
-			function assign(tile) {
-				snakehade.style.top = `${y}px`;
-				snakehade.style.left = `${x}px`;
-				snaketile1.style.top = `${ypositionarray[ypositionarray.length - 1]}px`;
-				snaketile1.style.left = `${
-					xpositionarray[xpositionarray.length - 1]
-				}px`;
-				tilearray.push(tile);
-				tilearray.forEach((element) => {
-					if (element !== undefined) {
-						element.style.left = `${
-							xpositionarray[
-								xpositionarray.length - element.attributes.value.textContent
-							]
-						}px`;
-						element.style.top = `${
-							ypositionarray[
-								ypositionarray.length - element.attributes.value.textContent
-							]
-						}px`;
-						var numb = element.style.left.match(/\d/g);
-						tileXpos = numb.join("");
-						var numb = element.style.top.match(/\d/g);
-						tileYpos = numb.join("");
-						tileXposarray.push(tileXpos);
-						tileYposarray.push(tileYpos);
-					}
-				});
+			function resetGame() {
+				clearInterval(gameLoop);
+				snake = [{x: 10, y: 0}];
+				direction = 'right';
+				score = 0;
+				updateScore();
+				gameContainer.innerHTML = '';
 			}
 
-			function Colusion() {
-				if (x >= 400 || x < 0 || y >= 400 || y < 0) {
-					x = 10;
-					y = 0;
-					xpositionarray = [];
-					ypositionarray = [];
-					tilearray = [];
-					speed = undefined;
-					tilecounter = 1;
-					privkey = undefined;
-					newkey = undefined;
-					snaketile1.style.top = 0;
-					snaketile1.style.left = 0;
-					score = 0;
-					scorediplay.textContent = `score: ${score}`;
-					Snakefood.style.top = `${Randomreturn()}px`;
-					Snakefood.style.left = `${Randomreturn()}px`;
-					numb = Snakefood.style.left.match(/\d/g);
-					Snakefoodx = numb.join("");
-					numb = Snakefood.style.top.match(/\d/g);
-					Snakefoody = numb.join("");
-					clearInterval(moveleftid);
-					clearInterval(moveupid);
-					clearInterval(movedownid);
-					clearInterval(moverightid);
-					// document.removeEventListener("keydown", movment);
-					if (document.querySelectorAll(".newtile").length >= 1) {
-						let removetile = document.querySelectorAll(".newtile");
-						removetile.forEach((element) => {
-							element.remove();
-						});
-					}
+			function getSpeed() {
+				switch (currentLevel) {
+					case 'Easy':
+						return 120;
+					case 'Medium':
+						return 90;
+					case 'Hard':
+						return 60;
+					default:
+						return 120;
 				}
-				if (x == Snakefoodx && y == Snakefoody) {
-					addandassigntile();
+			}
+
+			function updateLevel() {
+				currentLevel = gameLevelSelect.value;
+				currentLevelDisplay.textContent = `Level: ${currentLevel}`;
+			}
+
+			function createFood() {
+				food = {
+					x: Math.floor(Math.random() * 40) * 10,
+					y: Math.floor(Math.random() * 40) * 10
+				};
+				const foodElement = document.createElement('div');
+				foodElement.style.left = `${food.x}px`;
+				foodElement.style.top = `${food.y}px`;
+				foodElement.id = 'snakeFood';
+				gameContainer.appendChild(foodElement);
+			}
+
+			function moveSnake() {
+				const head = {...snake[0]};
+				switch(direction) {
+					case 'up': head.y -= 10; break;
+					case 'down': head.y += 10; break;
+					case 'left': head.x -= 10; break;
+					case 'right': head.x += 10; break;
+				}
+
+				if (isCollision(head)) {
+					gameOver();
+					return;
+				}
+
+				snake.unshift(head);
+				if (head.x === food.x && head.y === food.y) {
 					score++;
-					scorediplay.textContent = `score: ${score}`;
+					updateScore();
+					document.getElementById('snakeFood').remove();
+					createFood();
+				} else {
+					snake.pop();
 				}
-			}
-			function addandassigntile() {
-				const tile = document.createElement("div");
-				tile.classList.add("newtile");
-				gamecontainer.appendChild(tile);
-				tilecounter++;
-				tile.setAttribute("value", tilecounter);
-				assign(tile);
-				Snakefood.style.top = `${Randomreturn()}px`;
-				Snakefood.style.left = `${Randomreturn()}px`;
 
-				numb = Snakefood.style.left.match(/\d/g);
-				Snakefoodx = numb.join("");
-				numb = Snakefood.style.top.match(/\d/g);
-				Snakefoody = numb.join("");
-				for (let index = 0; index < tilecounter; index++) {
-					if (
-						Snakefoody == tileYposarray[tileYposarray.length - index] &&
-						Snakefoodx == tileXposarray[tileXposarray.length - index]
-					) {
-						Snakefood.style.top = `${Randomreturn()}px`;
-						Snakefood.style.left = `${Randomreturn()}px`;
+				updateSnakePosition();
+			}
+
+			function isCollision(head) {
+				return head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400 ||
+					   snake.some((part, index) => index !== 0 && part.x === head.x && part.y === head.y);
+			}
+
+			function updateSnakePosition() {
+				gameContainer.innerHTML = '';
+				snake.forEach((part, index) => {
+					const snakePart = document.createElement('div');
+					snakePart.style.left = `${part.x}px`;
+					snakePart.style.top = `${part.y}px`;
+					snakePart.classList.add('snake-part');
+					if (index === 0) snakePart.id = 'snakeHead';
+					gameContainer.appendChild(snakePart);
+				});
+				const foodElement = document.createElement('div');
+				foodElement.style.left = `${food.x}px`;
+				foodElement.style.top = `${food.y}px`;
+				foodElement.id = 'snakeFood';
+				gameContainer.appendChild(foodElement);
+			}
+
+			function changeDirection(event) {
+				const key = event.key;
+				if (key.startsWith('Arrow')) {
+					event.preventDefault();
+					const newDirection = key.replace('Arrow', '').toLowerCase();
+					const opposites = {up: 'down', down: 'up', left: 'right', right: 'left'};
+					if (newDirection !== opposites[direction]) {
+						direction = newDirection;
 					}
 				}
 			}
+
+			function updateScore() {
+				scoreDisplay.textContent = `Score: ${score}`;
+			}
+
+			function gameOver() {
+				clearInterval(gameLoop);
+				infoDiv.style.display = 'flex';
+				infoDiv.innerHTML = `
+					<h1>Game Over!</h1>
+					<p>Your score: ${score}</p>
+					<button onclick="location.reload()">Play Again</button>
+				`;
+				resetGame();
+			}
+
+			updateLevel(); // Initialize the level display
 		</script>
 	</body>
 </html>

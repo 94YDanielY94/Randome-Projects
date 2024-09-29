@@ -83,7 +83,6 @@
 			function shuffle(array) {
 				for (let i = array.length - 1; i > 0; i--) {
 					const randome = Math.floor(Math.random() * (i + 1));
-
 					[array[i], array[randome]] = [array[randome], array[i]];
 				}
 			}
@@ -91,9 +90,15 @@
 			boxs.forEach((box) => {
 				box.textContent = array[box.attributes.value.textContent];
 				box.onclick = function () {
+					if (box.style.color == "white") {
+						box.style.backgroundColor = "transparent";
+						box.style.color = "#222";
+						console.log("1");
+					} else {
 						box.style.backgroundColor = "rgba(20,200,20,.3)";
 						box.style.color = "white";
-					
+						console.log("2");
+					}
 				};
 			});
 			document.querySelectorAll("#bingo").forEach((element) => {
